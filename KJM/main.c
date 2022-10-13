@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Header.h"
+#include "Header1.h"
 int main()
 {
     Lista Estoque;
@@ -22,7 +22,7 @@ int main()
                 break;
             case 2:
                 printf("\tRemovendo Produtos...\n");
-                //RemovendoProduto(&Estoque);
+                RemovendoProduto(&Estoque);
                 break;
             case 3:
                 Mostra(Estoque);

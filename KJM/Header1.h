@@ -30,4 +30,6 @@ int InsereOrdenado(Lista *, Produto);
 int Tamanho(Lista);
 void Mostra(Lista);
 void AdicionandoProduto(Lista *);
+int Remover(Lista*, Produto);
+void RemovendoProduto(Lista*);
 #endif // HEADER_H_INCLUDED

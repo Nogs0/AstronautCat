@@ -7,8 +7,21 @@
 1665534925 source:/home/joao/Documents/Lab AED/KJM/Func.c
 	"Header.h"
 
-1665533485 /home/joao/Documents/Lab AED/KJM/Header.h
+1665533485 /home/joao/Documents/Lab AED/KJM/Header1.h
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
+
+1665638055 source:/home/joao/Documents/KJM/KJM/main.c
+	<stdio.h>
+	<stdlib.h>
+	"Header1.h"
+
+1665638359 /home/joao/Documents/KJM/KJM/Header1.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+
+1665638950 source:/home/joao/Documents/KJM/KJM/Func1.c
+	"Header1.h"
 

@@ -1,4 +1,4 @@
-#include "Header.h"
+#include "Header1.h"
 
 void CriaLista(Lista *l)
 {
@@ -49,7 +49,7 @@ int InsereOrdenado(Lista *l, Produto dado)
             aux->ant->prox = novo;
             aux->ant = novo;
             if(strcmp(l->inicio->p.Descricao, novo->p.Descricao) > 0)
-                        l->inicio = novo;
+                    l->inicio = novo;
             return 1;
         }
         aux = aux->prox;
@@ -70,6 +70,7 @@ int Tamanho(Lista l)
         aux = aux->prox;
     }
     while(aux != l.inicio);
+    free(aux);
     return tam;
 }
 void Mostra(Lista l)
@@ -93,7 +94,7 @@ void Mostra(Lista l)
 void AdicionandoProduto(Lista *l)
 {
     Produto aux;
-    printf("Qual o tipo do produto?\n1 - ALIMENTICIO\n2-LIMPEZA\n");
+    printf("Qual o tipo do produto?\n1 - ALIMENTICIO\n2 - LIMPEZA\n");
     scanf("%d", &aux.Tipo);
     aux.KJM = Tamanho(*l);
     printf("Entre com a descrição do produto: ");
@@ -104,4 +105,58 @@ void AdicionandoProduto(Lista *l)
     scanf("%d %d %d", &aux.Dia, &aux.Mes, &aux.Ano);
 
     InsereOrdenado(l, aux);
+}
+
+int Remover(Lista *l,Produto dado){
+    No *aux = NULL;
+
+    if(l->inicio == NULL) return 0;
+
+    aux = l->inicio;
+
+    do{
+        if(aux->p.Descricao == dado.Descricao || aux->p.CodigoB == dado.CodigoB || aux->p.KJM == dado.KJM){
+            if(aux == l->inicio && aux == l->fim){
+                l->inicio = l->fim = NULL;
+            }
+            aux->prox->ant = aux->ant;
+            aux->ant->prox = aux->prox;
+
+            if(aux == l->inicio)
+                l->inicio = aux->prox;
+            if(aux == l->fim)
+                l->fim = aux->ant;
+            free(aux);
+            return 1;
+        }
+        aux = aux->prox;
+    }while(aux != l->inicio);
+    return 0;
+}
+
+void RemovendoProduto(Lista *l){
+
+    Produto aux;
+    int option;
+    printf("\nDe qual maneira gostaria de localizar o produto?");
+    printf("\n1 - Descricao\n2 - Codigo de Barras\n3 - Codigo KJM\n");
+    scanf("%d", &option);
+    switch(option){
+        case 1:
+            printf("\nDigite a descricao do Produto: ");
+            scanf(" %30[^\n]", aux.Descricao);
+            Remover(l, aux);
+            break;
+        case 2:
+            printf("\nDigite o codigo de barras: ");
+            scanf(" %25[^\n]", aux.CodigoB);
+            Remover(l, aux);
+            break;
+        case 3:
+            printf("\nDigite o KJM: ");
+            scanf("%d", &aux.KJM);
+            Remover(l, aux);
+            break;
+        default: printf("\nDigite uma opção válida!\n");
+    }
 }
