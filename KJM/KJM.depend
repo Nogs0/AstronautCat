@@ -17,11 +17,12 @@
 	<stdlib.h>
 	"Header1.h"
 
-1665638359 /home/joao/Documents/KJM/KJM/Header1.h
+1665698246 /home/joao/Documents/KJM/KJM/Header1.h
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
+	<time.h>
 
-1665638950 source:/home/joao/Documents/KJM/KJM/Func1.c
+1665718131 source:/home/joao/Documents/KJM/KJM/Func1.c
 	"Header1.h"
 

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 typedef struct{
     char Descricao[30];
@@ -32,4 +33,6 @@ void Mostra(Lista);
 void AdicionandoProduto(Lista *);
 int Remover(Lista*, Produto);
 void RemovendoProduto(Lista*);
+int DataValida(int, int, int);
+struct tm DataAtual();
 #endif // HEADER_H_INCLUDED
