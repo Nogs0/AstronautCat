@@ -8,9 +8,9 @@ int main()
     int acao = 0;
     char option = ' ';
 
-    printf("*********************************************************\n");
-    printf("\tBem vindo ao KJM - Soluções em Armazenamento\n");
-
+    printf("********************************************************************************\n");
+    printf("\t\tBem vindo ao KJM - Soluções em Armazenamento\n");
+    printf("********************************************************************************\n");
     do{
         printf("O que você deseja fazer?\n");
         printf("1 - ADICONAR PRODUTO\n2 - REMOVER PRODUTO\n3 - MOSTRAR ESTOQUE\n4 - CONSULTAR VALIDADE\n");
@@ -26,6 +26,9 @@ int main()
                 break;
             case 3:
                 Mostra(Estoque);
+                break;
+            case 4:
+                ConferirValidade(Estoque);
                 break;
         }
         printf("Desjea continuar no programa? [ y - n ]: ");

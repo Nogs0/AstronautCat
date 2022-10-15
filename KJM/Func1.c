@@ -115,7 +115,6 @@ void AdicionandoProduto(Lista *l) // Função destinada a receber o produto que 
         printf("\nEntre com uma data real e possível!\n");
         printf("Entre com a data de validade do produto [dd mm aaaa]: ");
         scanf("%d %d %d", &aux.Dia, &aux.Mes, &aux.Ano);
-
     }
     InsereOrdenado(l, aux);
 }
@@ -205,4 +204,21 @@ struct tm DataAtual()  // Função que verifica o ano atual
     aux.tm_year += 1900;
     aux.tm_mon += 1;
     return aux;
+}
+
+void ConferirValidade(Lista l){
+    No *aux;
+    Lista fila;
+
+    if(l.inicio == NULL)    printf("O estoque está vazio!\n");
+    else{
+        aux = l.inicio;
+        do{
+            if(DataValida(aux->p.Dia,aux->p.Mes, aux->p.Ano) == 0)
+                InsereFinal( &fila, aux->p);
+            aux = aux->prox;
+        }while(aux != l.inicio);
+    }
+
+
 }

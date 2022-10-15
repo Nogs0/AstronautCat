@@ -12,7 +12,7 @@
 	<stdio.h>
 	<string.h>
 
-1665638055 source:/home/joao/Documents/KJM/KJM/main.c
+1665862441 source:/home/joao/Documents/KJM/KJM/main.c
 	<stdio.h>
 	<stdlib.h>
 	"Header1.h"
@@ -23,6 +23,6 @@
 	<string.h>
 	<time.h>
 
-1665718131 source:/home/joao/Documents/KJM/KJM/Func1.c
+1665862381 source:/home/joao/Documents/KJM/KJM/Func1.c
 	"Header1.h"
 

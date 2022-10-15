@@ -35,4 +35,5 @@ int Remover(Lista*, Produto);
 void RemovendoProduto(Lista*);
 int DataValida(int, int, int);
 struct tm DataAtual();
+void ConferirValidade(Lista);
 #endif // HEADER_H_INCLUDED
