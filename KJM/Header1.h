@@ -8,8 +8,6 @@
 typedef struct{
     char Descricao[30];
     char CodigoB[30];
-    int KJM;
-    int Tipo;
     int Dia;
     int Mes;
     int Ano;
@@ -26,14 +24,16 @@ typedef struct{
 }Lista;
 
 void CriaLista(Lista *);
-int InsereFinal(Lista *, Produto);
-int InsereOrdenado(Lista *, Produto);
-int Tamanho(Lista);
+int  InsereFinal(Lista *, Produto);
+int  InsereOrdenado(Lista *, Produto);
+int  Tamanho(Lista);
 void Mostra(Lista);
 void AdicionandoProduto(Lista *);
-int Remover(Lista*, Produto);
+int  Remover(Lista*, Produto);
 void RemovendoProduto(Lista*);
-int DataValida(int, int, int);
+int  DataValida(int, int, int);
 struct tm DataAtual();
 void ConferirValidade(Lista);
+void Salvar(Lista);
+void SalvandoProdutos(Lista*);
 #endif // HEADER_H_INCLUDED

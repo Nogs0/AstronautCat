@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Header1.h"
+#include <ctype.h>
+
 int main()
 {
-    Lista Estoque;
-    CriaLista(&Estoque);
+    Lista ListadeAlocacao;
+    CriaLista(&ListadeAlocacao);
     int acao = 0;
     char option = ' ';
 
@@ -13,26 +15,47 @@ int main()
     printf("********************************************************************************\n");
     do{
         printf("O que você deseja fazer?\n");
-        printf("1 - ADICONAR PRODUTO\n2 - REMOVER PRODUTO\n3 - MOSTRAR ESTOQUE\n4 - CONSULTAR VALIDADE\n");
+        printf("1 - ADICIONAR PRODUTOS À LISTA\n2 - REMOVER PRODUTO DA LISTA\n3 - MOSTRAR LISTA DE ALOCAÇÃO\n4 - CONSULTAR VALIDADE\n5 - SALVAR LISTA\n");
         scanf("%d", &acao);
         switch (acao){
             case 1:
                 printf("\tAdicionando produtos...\n");
-                AdicionandoProduto(&Estoque);
+                AdicionandoProduto(&ListadeAlocacao);
                 break;
             case 2:
+                if(ListadeAlocacao.inicio){
                 printf("\tRemovendo Produtos...\n");
-                RemovendoProduto(&Estoque);
+                RemovendoProduto(&ListadeAlocacao);
+                }
+                else printf("Estoque vazio\n");
                 break;
             case 3:
-                Mostra(Estoque);
+                Mostra(ListadeAlocacao);
                 break;
             case 4:
-                ConferirValidade(Estoque);
+                ConferirValidade(ListadeAlocacao);
+                break;
+            case 5:
+                SalvandoProdutos(&ListadeAlocacao);
                 break;
         }
-        printf("Desjea continuar no programa? [ y - n ]: ");
-        scanf("%s", &option);
+        printf("\n\nDeseja continuar no programa? [ y - n ]: ");
+        scanf(" %c", &option);
+        option = tolower(option);
+        if(option == 'n'){
+        if(ListadeAlocacao.inicio){
+            printf("Você possui itens em sua lista de alocação, gostaria de deixar o programa mesmo assim?\nSeus dados serão perdidos!\n");
+            printf("[y - n]");
+            scanf(" %c", &option);
+            option = tolower(option);
+            if(option == 'n'){
+                option = 'y';
+                printf("\n\nVocê será redirecionado para a aba principal do programa...\n\n");
+                }
+        }
+        }
+
     }while(option == 'y');
     return 0;
+
 }
