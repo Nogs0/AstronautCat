@@ -109,25 +109,32 @@ void AdicionandoProduto(Lista *l) // Função destinada a receber o produto que 
     {
         for(int i =0; i<n; i++)
         {
-        /*
-            Fazer função para procurar o CodigoB na base de dados dos fornecedores
-            Adicionar apenas em caso de condição verdadeira
-        */
+            /*
+                Fazer função para procurar o CodigoB na base de dados dos fornecedores
+                Adicionar apenas em caso de condição verdadeira
+            */
             Produto aux;
+            char Fornecedor[50];
+            printf("Entre com o fornecedor do produto: ");
+            scanf(" %30[^\n]", Fornecedor);
             printf("Entre com o código de barras: ");
             scanf(" %25[^\n]", aux.CodigoB);
-            printf("Entre com a descrição do produto: ");
-            scanf(" %30[^\n]", aux.Descricao);
-            printf("Entre com a data de validade do produto [dd mm aaaa]: ");
-            scanf("%d %d %d", &aux.Dia, &aux.Mes, &aux.Ano);
-
-            while(DataValida(aux.Dia, aux.Mes, aux.Ano) == 0)
+            ConfereCod(Fornecedor, aux.CodigoB);
+            if(ConfereEmp(Fornecedor, aux.CodigoB))
             {
-                printf("\nEntre com uma data real e possível!\n");
+                printf("Entre com a descrição do produto: ");
+                scanf(" %30[^\n]", aux.Descricao);
                 printf("Entre com a data de validade do produto [dd mm aaaa]: ");
                 scanf("%d %d %d", &aux.Dia, &aux.Mes, &aux.Ano);
+
+                while(DataValida(aux.Dia, aux.Mes, aux.Ano) == 0)
+                {
+                    printf("\nEntre com uma data real e possível!\n");
+                    printf("Entre com a data de validade do produto [dd mm aaaa]: ");
+                    scanf("%d %d %d", &aux.Dia, &aux.Mes, &aux.Ano);
+                }
+                InsereOrdenado(l, aux);
             }
-            InsereOrdenado(l, aux);
         }
     }
 }
@@ -164,18 +171,6 @@ int Remover(Lista *l,Produto dado)
     return 0;
 }
 
-/*No *BuscaBinaria(Lista *l, Produto dado, int inicio, int fim){
-    No *aux;
-    int meio
-
-    if(dado.CodigoB > aux->p.CodigoB){
-
-    }
-    else if(dado.CodigoB < aux->CodigoB){
-
-    }
-    else return aux;
-}*/
 void RemovendoProduto(Lista *l)  // Função que recebe o produto que será removido, tornando viável sua localização e remoção
 {
 
@@ -285,7 +280,39 @@ void SalvandoProdutos(Lista *l)
         Salvar(*l);
         CriaLista(l);
     }
-    else{
+    else
+    {
         return;
+    }
+}
+
+int ConfereEmp(char *dado, char *codigo)
+{
+    FILE *Arquivo;
+    char emp[30];
+    strcat(dado, "\n");
+    if((Arquivo = fopen("Empresas.txt", "r"))){
+    while(fgets(emp, 30, Arquivo))
+    {
+        if(strcmp(dado, emp) == 0)
+        {
+            fclose(Arquivo);
+            return ConfereCod(dado, codigo);
+        }
+        else printf("Empresa não encontrada!\n");
+    }
+    }
+    return 0;
+}
+
+int ConfereCod(char *dado, char *cod)
+{
+    char aux[20];
+    strncpy(aux, dado, sizeof(dado-2));
+    strcat(aux, ".txt");
+    FILE ArquivoEmpresa;
+    if((ArquivoEmpresa = fopen(aux, "r"))){
+
+
     }
 }

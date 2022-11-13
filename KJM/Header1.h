@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include <ctype.h>
 
 typedef struct{
     char Descricao[30];
@@ -36,4 +37,6 @@ struct tm DataAtual();
 void ConferirValidade(Lista);
 void Salvar(Lista);
 void SalvandoProdutos(Lista*);
+int ConfereEmp(char*, char*);
+int ConfereCod(char*, char*);
 #endif // HEADER_H_INCLUDED
