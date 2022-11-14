@@ -39,4 +39,5 @@ void Salvar(Lista);
 void SalvandoProdutos(Lista*);
 int ConfereEmp(char*, char*);
 int ConfereCod(char*, char*);
+char *MyStrcat(char *dest, const char *src);
 #endif // HEADER_H_INCLUDED

@@ -114,12 +114,11 @@ void AdicionandoProduto(Lista *l) // Função destinada a receber o produto que 
                 Adicionar apenas em caso de condição verdadeira
             */
             Produto aux;
-            char Fornecedor[50];
+            char Fornecedor[30];
             printf("Entre com o fornecedor do produto: ");
             scanf(" %30[^\n]", Fornecedor);
             printf("Entre com o código de barras: ");
             scanf(" %25[^\n]", aux.CodigoB);
-            ConfereCod(Fornecedor, aux.CodigoB);
             if(ConfereEmp(Fornecedor, aux.CodigoB))
             {
                 printf("Entre com a descrição do produto: ");
@@ -307,12 +306,25 @@ int ConfereEmp(char *dado, char *codigo)
 
 int ConfereCod(char *dado, char *cod)
 {
-    char aux[20];
-    strncpy(aux, dado, sizeof(dado-2));
+    int i = 0;
+    char aux[20] = { 0 };
+    char codigo[20];
+    while(dado[i] != '\n'){
+        i++;
+    }
+    strncat(aux, dado, i);
     strcat(aux, ".txt");
-    FILE ArquivoEmpresa;
+    strcat(cod, "\n");
+    FILE *ArquivoEmpresa;
     if((ArquivoEmpresa = fopen(aux, "r"))){
-
+        while(fgets(codigo, 20, ArquivoEmpresa)){
+            if(strcmp(cod, codigo) == 0){
+                fclose(ArquivoEmpresa);
+                return 1;
+            }
+        }
 
     }
+    printf("Codigo não encontrado na base de dados da empresa!\n");
+    return 0;
 }
