@@ -307,7 +307,7 @@ int ConfereEmp(char *dado, char *codigo)
 int ConfereCod(char *dado, char *cod)
 {
     int i = 0;
-    char aux[20] = { 0 };
+    char aux[20] = {"./"};
     char codigo[20];
     while(dado[i] != '\n'){
         i++;
