@@ -26,17 +26,17 @@
 1665862381 source:/home/joao/Documents/KJM/KJM/Func1.c
 	"Header1.h"
 
-1668370644 source:/home/joao/Documents/AED ||/KJM/KJM/Func1.c
+1668638364 source:/home/joao/Documents/AED ||/KJM/KJM/Func1.c
 	"Header1.h"
 
-1668368585 /home/joao/Documents/AED ||/KJM/KJM/Header1.h
+1668631683 /home/joao/Documents/AED ||/KJM/KJM/Header1.h
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 	<time.h>
 	<ctype.h>
 
-1668365536 source:/home/joao/Documents/AED ||/KJM/KJM/main.c
+1668636800 source:/home/joao/Documents/AED ||/KJM/KJM/main.c
 	<stdio.h>
 	<stdlib.h>
 	"Header1.h"

@@ -37,7 +37,6 @@ struct tm DataAtual();
 void ConferirValidade(Lista);
 void Salvar(Lista);
 void SalvandoProdutos(Lista*);
-int ConfereEmp(char*, char*);
-int ConfereCod(char*, char*);
-char *MyStrcat(char *dest, const char *src);
+int ConfereEmp(char*, Produto*);
+int ConfereCod(char*, Produto*);
 #endif // HEADER_H_INCLUDED

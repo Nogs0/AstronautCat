@@ -119,10 +119,9 @@ void AdicionandoProduto(Lista *l) // Função destinada a receber o produto que 
             scanf(" %30[^\n]", Fornecedor);
             printf("Entre com o código de barras: ");
             scanf(" %25[^\n]", aux.CodigoB);
-            if(ConfereEmp(Fornecedor, aux.CodigoB))
+            if(ConfereEmp(Fornecedor, &aux))
             {
-                printf("Entre com a descrição do produto: ");
-                scanf(" %30[^\n]", aux.Descricao);
+                printf("%s\n", aux.CodigoB);
                 printf("Entre com a data de validade do produto [dd mm aaaa]: ");
                 scanf("%d %d %d", &aux.Dia, &aux.Mes, &aux.Ano);
 
@@ -285,7 +284,7 @@ void SalvandoProdutos(Lista *l)
     }
 }
 
-int ConfereEmp(char *dado, char *codigo)
+int ConfereEmp(char *dado, Produto *produto)
 {
     FILE *Arquivo;
     char emp[30];
@@ -296,29 +295,29 @@ int ConfereEmp(char *dado, char *codigo)
         if(strcmp(dado, emp) == 0)
         {
             fclose(Arquivo);
-            return ConfereCod(dado, codigo);
+            return ConfereCod(dado, produto);
         }
-        else printf("Empresa não encontrada!\n");
     }
     }
     return 0;
 }
 
-int ConfereCod(char *dado, char *cod)
+int ConfereCod(char *dado, Produto *produto)
 {
     int i = 0;
-    char aux[20] = {"./"};
-    char codigo[20];
+    char aux[20] = {"./EMP/"};
+    char codigo[70];
     while(dado[i] != '\n'){
         i++;
     }
     strncat(aux, dado, i);
+    i = 0;
     strcat(aux, ".txt");
-    strcat(cod, "\n");
+    strcat(produto->CodigoB, "\n");
     FILE *ArquivoEmpresa;
     if((ArquivoEmpresa = fopen(aux, "r"))){
         while(fgets(codigo, 20, ArquivoEmpresa)){
-            if(strcmp(cod, codigo) == 0){
+            if(strcmp(produto->CodigoB, codigo) == 0){
                 fclose(ArquivoEmpresa);
                 return 1;
             }
