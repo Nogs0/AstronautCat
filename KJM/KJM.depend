@@ -42,3 +42,23 @@
 	"Header1.h"
 	<ctype.h>
 
+1668639042 source:/home/matheus-68/Documents/PUC/SEGUNDO-SEMESTRE/LAB-AED-II/MY-BRENCH/KJMSolutions/KJM/Func1.c
+	"Header1.h"
+
+1668639042 /home/matheus-68/Documents/PUC/SEGUNDO-SEMESTRE/LAB-AED-II/MY-BRENCH/KJMSolutions/KJM/Header1.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+
+1668442890 source:/home/matheus-68/Documents/PUC/SEGUNDO-SEMESTRE/LAB-AED-II/MY-BRENCH/KJMSolutions/KJM/main.c
+	<stdio.h>
+	<stdlib.h>
+	"Header1.h"
+	<ctype.h>
+	"Func1.c"
+
+1668639042 /home/matheus-68/Documents/PUC/SEGUNDO-SEMESTRE/LAB-AED-II/MY-BRENCH/KJMSolutions/KJM/Func1.c
+	"Header1.h"
+

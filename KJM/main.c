@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "Header1.h"
 #include <ctype.h>
+#include "Func1.c"
 
 int main()
 {
