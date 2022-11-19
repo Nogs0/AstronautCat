@@ -299,6 +299,7 @@ int ConfereEmp(char *dado, Produto *produto)
         }
     }
     }
+    printf("Empresa não existente\n");
     return 0;
 }
 
@@ -311,13 +312,16 @@ int ConfereCod(char *dado, Produto *produto)
         i++;
     }
     strncat(aux, dado, i);
-    i = 0;
     strcat(aux, ".txt");
     strcat(produto->CodigoB, "\n");
     FILE *ArquivoEmpresa;
+    i = 0;
     if((ArquivoEmpresa = fopen(aux, "r"))){
         while(fgets(codigo, 20, ArquivoEmpresa)){
+            i++;
             if(strcmp(produto->CodigoB, codigo) == 0){
+                printf("Produto existente\n");
+
                 fclose(ArquivoEmpresa);
                 return 1;
             }
