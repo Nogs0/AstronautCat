@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Header1.h"
+#include "Head.h"
 #include <ctype.h>
-#include "Func1.c"
+#include "Func.c"
 
 int main()
 {
-    Lista ListadeAlocacao;
+    Lista ListadeAlocacao, ListaEmpresa;
     CriaLista(&ListadeAlocacao);
+    CriaLista(&ListaEmpresa);
     int acao = 0;
     char option = ' ';
 
@@ -21,7 +22,7 @@ int main()
         switch (acao){
             case 1:
                 printf("\tAdicionando produtos...\n");
-                AdicionandoProduto(&ListadeAlocacao);
+                AdicionandoProduto(&ListadeAlocacao, &ListaEmpresa);
                 break;
             case 2:
                 if(ListadeAlocacao.inicio){

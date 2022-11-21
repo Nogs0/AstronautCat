@@ -1,9 +1,22 @@
-#include "Header1.h"
+#include "Head.h"
 
 void CriaLista(Lista *l)
 {
     l->inicio = NULL;
     l->fim = NULL;
+}
+
+No Busca(Lista *l, char *cod){
+
+    No *aux = l->inicio;
+
+    while(aux != NULL){
+
+        if(strcmp(aux->p.CodigoB, cod) == 0){
+            return *aux;
+        }
+        aux = aux->prox;
+    }
 }
 int InsereFinal(Lista* l, Produto dado)
 {
@@ -88,7 +101,8 @@ void Mostra(Lista l)
         {
             printf("%s\n", aux->p.Descricao);
             printf("%s\n", aux->p.CodigoB);
-            printf("%d/%d/%d\n", aux->p.Dia, aux->p.Mes, aux->p.Ano);
+            printf("%s\n", aux->p.Fornecedor);
+            //  printf("%d/%d/%d\n", aux->p.Dia, aux->p.Mes, aux->p.Ano);
             printf("--------------------------------------\n");
             aux = aux->prox;
         }
@@ -96,8 +110,12 @@ void Mostra(Lista l)
     }
 }
 
-void AdicionandoProduto(Lista *l) // Função destinada a receber o produto que será adicionado, transformando-o em um Produto para a função InsereOrdenado
+void AdicionandoProduto(Lista *l, Lista *l2) // Função destinada a receber o produto que será adicionado, transformando-o em um Produto para a função InsereOrdenado
 {
+    char Fornecedor[30];
+    printf("Entre com o fornecedor do produto: ");
+    scanf(" %30[^\n]", Fornecedor);
+    if(InserirMemoria(Fornecedor, l2) == 0) return;
     printf("Você deseja adicionar quantos produtos?\n");
     int n;
     scanf("%d", &n);
@@ -114,14 +132,12 @@ void AdicionandoProduto(Lista *l) // Função destinada a receber o produto que 
                 Adicionar apenas em caso de condição verdadeira
             */
             Produto aux;
-            char Fornecedor[30];
-            printf("Entre com o fornecedor do produto: ");
-            scanf(" %30[^\n]", Fornecedor);
+            strcpy(aux.Fornecedor, Fornecedor);
+            //strcat(aux.Fornecedor, '\n');
             printf("Entre com o código de barras: ");
             scanf(" %25[^\n]", aux.CodigoB);
-            if(ConfereEmp(Fornecedor, &aux))
+            if(ConfereCod(Fornecedor, &aux, l2))
             {
-                printf("%s\n", aux.CodigoB);
                 printf("Entre com a data de validade do produto [dd mm aaaa]: ");
                 scanf("%d %d %d", &aux.Dia, &aux.Mes, &aux.Ano);
 
@@ -141,7 +157,8 @@ int Remover(Lista *l,Produto dado)
 {
     No *aux = NULL;
 
-    if(l->inicio == NULL) return 0;
+    if(l->inicio == NULL)
+        return 0;
 
     aux = l->inicio;
 
@@ -166,6 +183,7 @@ int Remover(Lista *l,Produto dado)
         aux = aux->prox;
     }
     while(aux != l->inicio);
+    printf("nn");
     return 0;
 }
 
@@ -254,8 +272,8 @@ void Salvar(Lista l)
         do
         {
             fprintf(estoque, "%s", aux->p.Descricao);
-            fprintf(estoque, "%c", '\n');
             fprintf(estoque, "%s", aux->p.CodigoB);
+            fprintf(estoque, "%s", aux->p.Fornecedor);
             aux = aux->prox;
         }
         while(aux != l.inicio);
@@ -283,51 +301,87 @@ void SalvandoProdutos(Lista *l)
         return;
     }
 }
-
-int ConfereEmp(char *dado, Produto *produto)
+int ConfereEmp(char *dado)
 {
     FILE *Arquivo;
     char emp[30];
     strcat(dado, "\n");
-    if((Arquivo = fopen("Empresas.txt", "r"))){
-    while(fgets(emp, 30, Arquivo))
+    if((Arquivo = fopen("Empresas.txt", "r")))
     {
-        if(strcmp(dado, emp) == 0)
+        while(fgets(emp, 30, Arquivo))
         {
-            fclose(Arquivo);
-            return ConfereCod(dado, produto);
+            if(strcmp(dado, emp) == 0)
+            {
+                fclose(Arquivo);
+                return 1;
+            }
         }
     }
-    }
+    fclose(Arquivo);
     printf("Empresa não existente\n");
     return 0;
 }
 
-int ConfereCod(char *dado, Produto *produto)
+int ConfereCod(char *dado, Produto *produto, Lista *l2)
 {
     int i = 0;
     char aux[20] = {"./EMP/"};
     char codigo[70];
-    while(dado[i] != '\n'){
+    while(dado[i] != '\n')
         i++;
-    }
     strncat(aux, dado, i);
     strcat(aux, ".txt");
     strcat(produto->CodigoB, "\n");
     FILE *ArquivoEmpresa;
     i = 0;
-    if((ArquivoEmpresa = fopen(aux, "r"))){
+    if((ArquivoEmpresa = fopen(aux, "r")) != NULL)
+    {
         while(fgets(codigo, 20, ArquivoEmpresa)){
-            i++;
-            if(strcmp(produto->CodigoB, codigo) == 0){
-                printf("Produto existente\n");
-
-                fclose(ArquivoEmpresa);
-                return 1;
-            }
+          i++;
+        if(strcmp(produto->CodigoB, codigo) == 0)
+        {
+            No a;
+            a = Busca(l2, codigo);
+            strcpy(produto->Descricao, a.p.Descricao);
+            fclose(ArquivoEmpresa);
+            return 1;
         }
-
+        }
     }
+    fclose(ArquivoEmpresa);
     printf("Codigo não encontrado na base de dados da empresa!\n");
+    return 0;
+}
+
+int InserirMemoria(char *Empresa, Lista *l)  // Função que passa todos os itens de um Fornecedor para a memória
+{
+
+    if(ConfereEmp(Empresa))
+    {
+        FILE *Arq;
+        int i = 0;
+        Produto prod;
+        char aux[30] = {"./EMP/"};
+        char codigo[200];
+        while(Empresa[i] != '\n')
+            i++;
+        strncat(aux, Empresa, i);
+        strcat(aux, ".txt");
+        if((Arq = fopen(aux, "r")) == NULL) return 0;
+
+        while(codigo[0] != '\0')
+        {
+            fgets(codigo, 200, Arq);
+            strcpy(prod.Descricao, codigo);
+            memset(codigo, '\0', 200);
+            fgets(codigo, 200, Arq);
+            strcpy(prod.CodigoB, codigo);
+            if(prod.Descricao[0] != '\0' && prod.CodigoB[0] != '\0')
+                InsereFinal(l, prod);
+
+        }
+        fclose(Arq);
+        return 1;
+    }
     return 0;
 }
