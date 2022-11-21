@@ -13,12 +13,13 @@ int main()
     char option = ' ';
 
     printf("********************************************************************************\n");
-    printf("\t\tBem vindo ao KJM - Soluções em Armazenamento\n");
+    printf("\t\tBem vindo ao Astronaut Cat - Soluções em Armazenamento\n");
     printf("********************************************************************************\n");
     do{
         printf("O que você deseja fazer?\n");
         printf("1 - ADICIONAR PRODUTOS À LISTA\n2 - REMOVER PRODUTO DA LISTA\n3 - MOSTRAR LISTA DE ALOCAÇÃO\n4 - CONSULTAR VALIDADE\n5 - SALVAR LISTA\n");
         scanf("%d", &acao);
+        clearscr();
         switch (acao){
             case 1:
                 printf("\tAdicionando produtos...\n");
@@ -44,6 +45,7 @@ int main()
         printf("\n\nDeseja continuar no programa? [ y - n ]: ");
         scanf(" %c", &option);
         option = tolower(option);
+        clearscr();
         if(option == 'n'){
         if(ListadeAlocacao.inicio){
             printf("Você possui itens em sua lista de alocação, gostaria de deixar o programa mesmo assim?\nSeus dados serão perdidos!\n");
@@ -54,6 +56,7 @@ int main()
                 option = 'y';
                 printf("\n\nVocê será redirecionado para a aba principal do programa...\n\n");
                 }
+            clearscr();
         }
         }
 

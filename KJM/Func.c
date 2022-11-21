@@ -1,5 +1,10 @@
 #include "Head.h"
 
+void clearscr(void) {
+	printf("\033c");
+	printf("\033[H\033[J");
+	return;
+}
 void CriaLista(Lista *l)
 {
     l->inicio = NULL;
@@ -9,14 +14,17 @@ void CriaLista(Lista *l)
 No Busca(Lista *l, char *cod){
 
     No *aux = l->inicio;
+    No *p;
 
     while(aux != NULL){
 
         if(strcmp(aux->p.CodigoB, cod) == 0){
-            return *aux;
+            p = aux;
+            break;
         }
         aux = aux->prox;
     }
+    return *p;
 }
 int InsereFinal(Lista* l, Produto dado)
 {
@@ -151,6 +159,7 @@ void AdicionandoProduto(Lista *l, Lista *l2) // Função destinada a receber o p
             }
         }
     }
+    clearscr();
 }
 
 int Remover(Lista *l,Produto dado)
@@ -210,6 +219,7 @@ void RemovendoProduto(Lista *l)  // Função que recebe o produto que será remo
     default:
         printf("\nDigite uma opção válida!\n");
     }
+    clearscr();
 }
 
 int DataValida(int dia, int mes, int ano)  // Função que verifica se as datas de vencimento inseridas são válidas
@@ -295,11 +305,11 @@ void SalvandoProdutos(Lista *l)
     {
         Salvar(*l);
         CriaLista(l);
+        clearscr();
     }
     else
-    {
         return;
-    }
+
 }
 int ConfereEmp(char *dado)
 {

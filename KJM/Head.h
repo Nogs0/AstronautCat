@@ -26,6 +26,7 @@ typedef struct{
     No *fim;
 }Lista;
 
+void clearscr(void);
 void CriaLista(Lista *);
 int  InsereFinal(Lista *, Produto);
 int  InsereOrdenado(Lista *, Produto);
