@@ -256,7 +256,7 @@ void ConferirValidade(Lista *l)
     if(l->inicio == NULL) return;
     No *aux;
     aux = l->inicio;
-
+    printf("%s", aux->p.Data);
     do
     {
         if(DataValida(aux->p.Dia, aux->p.Mes, aux->p.Ano) == 0)
