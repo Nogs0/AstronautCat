@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/joao/Documents/AED ||/KJM/KJM"
+CMAKE_SOURCE_DIR = "/home/joao/Documents/AED ||/AstronautCat/KJM"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/joao/Documents/AED ||/KJM/KJM"
+CMAKE_BINARY_DIR = "/home/joao/Documents/AED ||/AstronautCat/KJM"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/lib.dir/depend.make
@@ -72,16 +72,16 @@ include CMakeFiles/lib.dir/flags.make
 CMakeFiles/lib.dir/Func.c.o: CMakeFiles/lib.dir/flags.make
 CMakeFiles/lib.dir/Func.c.o: Func.c
 CMakeFiles/lib.dir/Func.c.o: CMakeFiles/lib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/joao/Documents/AED ||/KJM/KJM/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/lib.dir/Func.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/lib.dir/Func.c.o -MF CMakeFiles/lib.dir/Func.c.o.d -o CMakeFiles/lib.dir/Func.c.o -c "/home/joao/Documents/AED ||/KJM/KJM/Func.c"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/joao/Documents/AED ||/AstronautCat/KJM/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/lib.dir/Func.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/lib.dir/Func.c.o -MF CMakeFiles/lib.dir/Func.c.o.d -o CMakeFiles/lib.dir/Func.c.o -c "/home/joao/Documents/AED ||/AstronautCat/KJM/Func.c"
 
 CMakeFiles/lib.dir/Func.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/lib.dir/Func.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/joao/Documents/AED ||/KJM/KJM/Func.c" > CMakeFiles/lib.dir/Func.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/joao/Documents/AED ||/AstronautCat/KJM/Func.c" > CMakeFiles/lib.dir/Func.c.i
 
 CMakeFiles/lib.dir/Func.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lib.dir/Func.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/joao/Documents/AED ||/KJM/KJM/Func.c" -o CMakeFiles/lib.dir/Func.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/joao/Documents/AED ||/AstronautCat/KJM/Func.c" -o CMakeFiles/lib.dir/Func.c.s
 
 # Object files for target lib
 lib_OBJECTS = \
@@ -93,7 +93,7 @@ lib_EXTERNAL_OBJECTS =
 liblib.a: CMakeFiles/lib.dir/Func.c.o
 liblib.a: CMakeFiles/lib.dir/build.make
 liblib.a: CMakeFiles/lib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/joao/Documents/AED ||/KJM/KJM/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library liblib.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/joao/Documents/AED ||/AstronautCat/KJM/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library liblib.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/lib.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/lib.dir/link.txt --verbose=$(VERBOSE)
 
@@ -106,6 +106,6 @@ CMakeFiles/lib.dir/clean:
 .PHONY : CMakeFiles/lib.dir/clean
 
 CMakeFiles/lib.dir/depend:
-	cd "/home/joao/Documents/AED ||/KJM/KJM" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/joao/Documents/AED ||/KJM/KJM" "/home/joao/Documents/AED ||/KJM/KJM" "/home/joao/Documents/AED ||/KJM/KJM" "/home/joao/Documents/AED ||/KJM/KJM" "/home/joao/Documents/AED ||/KJM/KJM/CMakeFiles/lib.dir/DependInfo.cmake" --color=$(COLOR)
+	cd "/home/joao/Documents/AED ||/AstronautCat/KJM" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/joao/Documents/AED ||/AstronautCat/KJM" "/home/joao/Documents/AED ||/AstronautCat/KJM" "/home/joao/Documents/AED ||/AstronautCat/KJM" "/home/joao/Documents/AED ||/AstronautCat/KJM" "/home/joao/Documents/AED ||/AstronautCat/KJM/CMakeFiles/lib.dir/DependInfo.cmake" --color=$(COLOR)
 .PHONY : CMakeFiles/lib.dir/depend
 

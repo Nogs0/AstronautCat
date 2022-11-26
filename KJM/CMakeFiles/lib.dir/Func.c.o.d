@@ -1,5 +1,7 @@
-CMakeFiles/lib.dir/Func.c.o: /home/joao/Documents/AED\ ||/KJM/KJM/Func.c \
- /usr/include/stdc-predef.h /home/joao/Documents/AED\ ||/KJM/KJM/Head.h \
+CMakeFiles/lib.dir/Func.c.o: \
+ /home/joao/Documents/AED\ ||/AstronautCat/KJM/Func.c \
+ /usr/include/stdc-predef.h \
+ /home/joao/Documents/AED\ ||/AstronautCat/KJM/Head.h \
  /usr/include/stdlib.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \

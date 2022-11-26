@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/joao/Documents/AED ||/KJM/KJM/main.c" "CMakeFiles/Solution.dir/main.c.o" "gcc" "CMakeFiles/Solution.dir/main.c.o.d"
+  "/home/joao/Documents/AED ||/AstronautCat/KJM/main.c" "CMakeFiles/Solution.dir/main.c.o" "gcc" "CMakeFiles/Solution.dir/main.c.o.d"
   )
 
 # Targets to which this target links.

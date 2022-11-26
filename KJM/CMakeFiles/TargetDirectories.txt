@@ -1,4 +1,4 @@
-/home/joao/Documents/AED ||/KJM/KJM/CMakeFiles/lib.dir
-/home/joao/Documents/AED ||/KJM/KJM/CMakeFiles/Solution.dir
-/home/joao/Documents/AED ||/KJM/KJM/CMakeFiles/edit_cache.dir
-/home/joao/Documents/AED ||/KJM/KJM/CMakeFiles/rebuild_cache.dir
+/home/joao/Documents/AED ||/AstronautCat/KJM/CMakeFiles/lib.dir
+/home/joao/Documents/AED ||/AstronautCat/KJM/CMakeFiles/Solution.dir
+/home/joao/Documents/AED ||/AstronautCat/KJM/CMakeFiles/edit_cache.dir
+/home/joao/Documents/AED ||/AstronautCat/KJM/CMakeFiles/rebuild_cache.dir

@@ -1,6 +1,6 @@
 CMakeFiles/Solution.dir/main.c.o: \
- /home/joao/Documents/AED\ ||/KJM/KJM/main.c /usr/include/stdc-predef.h \
- /usr/include/stdio.h \
+ /home/joao/Documents/AED\ ||/AstronautCat/KJM/main.c \
+ /usr/include/stdc-predef.h /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
@@ -48,11 +48,13 @@ CMakeFiles/Solution.dir/main.c.o: \
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h /usr/include/alloca.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /home/joao/Documents/AED\ ||/KJM/KJM/Head.h /usr/include/string.h \
+ /home/joao/Documents/AED\ ||/AstronautCat/KJM/Head.h \
+ /usr/include/string.h \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
  /usr/include/strings.h /usr/include/time.h \
  /usr/include/x86_64-linux-gnu/bits/time.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
- /usr/include/ctype.h /home/joao/Documents/AED\ ||/KJM/KJM/Func.c
+ /usr/include/ctype.h \
+ /home/joao/Documents/AED\ ||/AstronautCat/KJM/Func.c
