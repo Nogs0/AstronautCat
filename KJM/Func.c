@@ -30,6 +30,7 @@ No Busca(Lista *l, char *cod)
     }
     return *p;
 }
+
 int InsereFinal(Lista* l, Produto dado)
 {
     No *aux;
@@ -88,7 +89,7 @@ int InsereOrdenado(Lista *l, Produto dado)
     }
     return 1;
 }
-int Tamanho(Lista l) // Função que retorna o tamanho da lista, tornando possível o preenchimento automático do código KJM
+int Tamanho(Lista l) // Função que retorna o tamanho da lista, tornando possível o preenchimento automático do
 {
     No *aux = NULL;
     if(l.inicio == NULL) return 0;
@@ -164,63 +165,47 @@ void AdicionandoProduto(Lista *l, Lista *l2) // Função destinada a receber o p
     }
 }
 
-int Remover(Lista *l,Produto dado)
+int Remover(Lista *l, char *dado)
 {
-    No *aux = NULL;
+    No *aux;
 
     if(l->inicio == NULL)
         return 0;
 
     aux = l->inicio;
-
     do
     {
-        if(aux->p.Descricao == dado.Descricao || aux->p.CodigoB == dado.CodigoB)
+        if (strcmp(aux->p.CodigoB, dado) == 0)
         {
-            if(aux == l->inicio && aux == l->fim)
+            if (aux == l->inicio && aux == l->fim)   // só tem um
             {
-                l->inicio = l->fim = NULL;
+                free(aux);   // libera memória
+                l->inicio = l->fim = NULL;  // reinicializa a lista
             }
-            aux->prox->ant = aux->ant;
-            aux->ant->prox = aux->prox;
 
-            if(aux == l->inicio)
-                l->inicio = aux->prox;
-            if(aux == l->fim)
-                l->fim = aux->ant;
+            aux->prox->ant = aux->ant;   // anterior do próximo recebe o anterior de aux
+            aux->ant->prox = aux->prox;  // próximo do anterior recebe o próximo de aux
+
+            if (aux == l->inicio) l->inicio = aux->prox;
+            if (aux == l->fim) l->fim = aux->ant;
             free(aux);
             return 1;
         }
         aux = aux->prox;
     }
-    while(aux != l->inicio);
-    printf("nn");
+    while (aux != l->inicio);
+
+    // se chegou aqui, não achou d
     return 0;
 }
 
 void RemovendoProduto(Lista *l)  // Função que recebe o produto que será removido, tornando viável sua localização e remoção
 {
-
-    Produto aux;
+    char cod[30];
     int option;
-    printf("\nDe qual maneira gostaria de localizar o produto?");
-    printf("\n1 - Descricao\n2 - Codigo de Barras\n");
-    scanf("%d", &option);
-    switch(option)
-    {
-    case 1:
-        printf("\nDigite a descricao do Produto: ");
-        scanf(" %30[^\n]", aux.Descricao);
-        Remover(l, aux);
-        break;
-    case 2:
-        printf("\nDigite o codigo de barras: ");
-        scanf(" %25[^\n]", aux.CodigoB);
-        Remover(l, aux);
-        break;
-    default:
-        printf("\nDigite uma opção válida!\n");
-    }
+    printf("\nDigite o código de barras: ");
+    scanf(" %25[^\n]", cod);
+    Remover(l, cod);
     clearscr();
 }
 
@@ -251,20 +236,28 @@ struct tm DataAtual()  // Função que verifica o ano atual
 
 void ConferirValidade(Lista *l)
 {
+    clearscr();
     char est[8] = {"estoque"};
     if(InserirMemoria(est, l, 0) == 0) return;
     if(l->inicio == NULL) return;
     No *aux;
+    No f;
     aux = l->inicio;
-    printf("%s", aux->p.Data);
     do
     {
         if(DataValida(aux->p.Dia, aux->p.Mes, aux->p.Ano) == 0)
         {
+            char opt;
             printf("%s", aux->p.Descricao);
             printf("%s", aux->p.CodigoB);
-            printf("%s", aux->p.Data);
-            printf("Este item está vencido!\nRemova do estoque imediatamente!\n");
+            printf("%d/%d/%d", aux->p.Dia, aux->p.Mes, aux->p.Ano);
+            printf("Este item está vencido!\n\n");
+            printf("Você deseja remover este item do estoque? [ y - n ]\n");
+            scanf(" %c", &opt);
+            if(opt == 'y')
+            {
+                Remover(l, aux->p.CodigoB);
+            }
         }
         aux = aux->prox;
     }
@@ -312,19 +305,20 @@ void Salvar(Lista l)
 
 void SalvandoProdutos(Lista *l)
 {
-    if(l->inicio != NULL){
-    printf("Você gostaria de alocar estes itens no estoque?\n");
-    Mostra(*l);
-    printf("[y - n]\n");
-    char opt;
-    scanf(" %c", &opt);
-    opt = tolower(opt);
-    if(opt == 'y')
+    if(l->inicio != NULL)
     {
-        Salvar(*l);
-        CriaLista(l);
-        clearscr();
-    }
+        printf("Você gostaria de alocar estes itens no estoque?\n");
+        Mostra(*l);
+        printf("[y - n]\n");
+        char opt;
+        scanf(" %c", &opt);
+        opt = tolower(opt);
+        if(opt == 'y')
+        {
+            Salvar(*l);
+            CriaLista(l);
+            clearscr();
+        }
     }
     else
         return;
@@ -446,19 +440,27 @@ void PassaInteiro(Produto *p)
         char auxdia[3], auxmes[3], auxano[5], a;
         int i = 1, j=0;
 
-        while(i<3){
+        while(i<3)
+        {
             auxdia[j] = p->Data[i];
-            i++; j++;
+            i++;
+            j++;
         }
-        i = 4; j = 0;
-        while(i<6){
+        i = 4;
+        j = 0;
+        while(i<6)
+        {
             auxmes[j] = p->Data[i];
-            i++; j++;
+            i++;
+            j++;
         }
-        i = 7; j = 0;
-        while(i<11){
+        i = 7;
+        j = 0;
+        while(i<11)
+        {
             auxano[j] = p->Data[i];
-            i++; j++;
+            i++;
+            j++;
         }
 
         p->Dia = atoi(auxdia);

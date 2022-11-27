@@ -34,7 +34,7 @@ int  InsereOrdenado(Lista *, Produto);
 int  Tamanho(Lista);
 void Mostra(Lista);
 void AdicionandoProduto(Lista *, Lista *);
-int  Remover(Lista*, Produto);
+int  Remover(Lista*, char *);
 void RemovendoProduto(Lista*);
 int  DataValida(int, int, int);
 struct tm DataAtual();
