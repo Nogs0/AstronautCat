@@ -142,53 +142,53 @@ Solution/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Solution.dir/build.make CMakeFiles/Solution.dir/build
 .PHONY : Solution/fast
 
-Func.o: Func.c.o
-.PHONY : Func.o
+lib/Func.o: lib/Func.c.o
+.PHONY : lib/Func.o
 
 # target to build an object file
-Func.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lib.dir/build.make CMakeFiles/lib.dir/Func.c.o
-.PHONY : Func.c.o
+lib/Func.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lib.dir/build.make CMakeFiles/lib.dir/lib/Func.c.o
+.PHONY : lib/Func.c.o
 
-Func.i: Func.c.i
-.PHONY : Func.i
+lib/Func.i: lib/Func.c.i
+.PHONY : lib/Func.i
 
 # target to preprocess a source file
-Func.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lib.dir/build.make CMakeFiles/lib.dir/Func.c.i
-.PHONY : Func.c.i
+lib/Func.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lib.dir/build.make CMakeFiles/lib.dir/lib/Func.c.i
+.PHONY : lib/Func.c.i
 
-Func.s: Func.c.s
-.PHONY : Func.s
+lib/Func.s: lib/Func.c.s
+.PHONY : lib/Func.s
 
 # target to generate assembly for a file
-Func.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lib.dir/build.make CMakeFiles/lib.dir/Func.c.s
-.PHONY : Func.c.s
+lib/Func.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lib.dir/build.make CMakeFiles/lib.dir/lib/Func.c.s
+.PHONY : lib/Func.c.s
 
-main.o: main.c.o
-.PHONY : main.o
+src/main.o: src/main.c.o
+.PHONY : src/main.o
 
 # target to build an object file
-main.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Solution.dir/build.make CMakeFiles/Solution.dir/main.c.o
-.PHONY : main.c.o
+src/main.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Solution.dir/build.make CMakeFiles/Solution.dir/src/main.c.o
+.PHONY : src/main.c.o
 
-main.i: main.c.i
-.PHONY : main.i
+src/main.i: src/main.c.i
+.PHONY : src/main.i
 
 # target to preprocess a source file
-main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Solution.dir/build.make CMakeFiles/Solution.dir/main.c.i
-.PHONY : main.c.i
+src/main.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Solution.dir/build.make CMakeFiles/Solution.dir/src/main.c.i
+.PHONY : src/main.c.i
 
-main.s: main.c.s
-.PHONY : main.s
+src/main.s: src/main.c.s
+.PHONY : src/main.s
 
 # target to generate assembly for a file
-main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Solution.dir/build.make CMakeFiles/Solution.dir/main.c.s
-.PHONY : main.c.s
+src/main.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Solution.dir/build.make CMakeFiles/Solution.dir/src/main.c.s
+.PHONY : src/main.c.s
 
 # Help Target
 help:
@@ -200,12 +200,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Solution"
 	@echo "... lib"
-	@echo "... Func.o"
-	@echo "... Func.i"
-	@echo "... Func.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... lib/Func.o"
+	@echo "... lib/Func.i"
+	@echo "... lib/Func.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 .PHONY : help
 
 

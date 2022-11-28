@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Head.h"
+#include "../includes/Head.h"
 #include <ctype.h>
-#include "Func.c"
+#include "../lib/Func.c"
 
 int main()
 {

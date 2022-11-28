@@ -37,7 +37,7 @@ void AdicionandoProduto(Lista *, Lista *);
 int  Remover(Lista*, char *);
 void RemovendoProduto(Lista*);
 int  DataValida(int, int, int);
-struct tm DataAtual();
+struct tm DataAtual(void);
 void ConferirValidade(Lista*);
 void Salvar(Lista);
 void SalvandoProdutos(Lista*);

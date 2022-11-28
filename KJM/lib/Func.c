@@ -1,4 +1,4 @@
-#include "Head.h"
+#include "../includes/Head.h"
 
 void clearscr(void)
 {
@@ -16,7 +16,7 @@ No Busca(Lista *l, char *cod)
 {
 
     No *aux = l->inicio;
-    No *p;
+    No *p = NULL;
 
     while(aux != NULL)
     {
@@ -114,8 +114,8 @@ void Mostra(Lista l)
         {
             printf("%s\n", aux->p.Descricao);
             printf("%s\n", aux->p.CodigoB);
-            printf("%s\n", aux->p.Data);
-            //  printf("%d/%d/%d\n", aux->p.Dia, aux->p.Mes, aux->p.Ano);
+            //printf("%s\n", aux->p.Data);
+            printf("%d/%d/%d\n", aux->p.Dia, aux->p.Mes, aux->p.Ano);
             printf("--------------------------------------\n");
             aux = aux->prox;
         }
@@ -214,8 +214,8 @@ int DataValida(int dia, int mes, int ano)  // Função que verifica se as datas 
     struct tm atual;
     atual = DataAtual();
     if(ano == atual.tm_year)
-        if(mes >= atual.tm_mon)
-            if(dia >= atual.tm_mday)
+        if(mes >= atual.tm_mon && mes <=12)
+            if(dia >= atual.tm_mday && dia <=30)
                 return 1;
     if(ano > atual.tm_year)
         return 1;
@@ -251,9 +251,10 @@ void ConferirValidade(Lista *l)
             printf("%s", aux->p.Descricao);
             printf("%s", aux->p.CodigoB);
             printf("%d/%d/%d", aux->p.Dia, aux->p.Mes, aux->p.Ano);
-            printf("Este item está vencido!\n\n");
+            printf("\nEste item está vencido!\n\n");
             printf("Você deseja remover este item do estoque? [ y - n ]\n");
             scanf(" %c", &opt);
+            opt = tolower(opt);
             if(opt == 'y')
             {
                 Remover(l, aux->p.CodigoB);

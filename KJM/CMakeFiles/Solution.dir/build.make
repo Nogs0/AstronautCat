@@ -69,28 +69,28 @@ include CMakeFiles/Solution.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Solution.dir/flags.make
 
-CMakeFiles/Solution.dir/main.c.o: CMakeFiles/Solution.dir/flags.make
-CMakeFiles/Solution.dir/main.c.o: main.c
-CMakeFiles/Solution.dir/main.c.o: CMakeFiles/Solution.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/joao/Documents/AED ||/AstronautCat/KJM/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Solution.dir/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Solution.dir/main.c.o -MF CMakeFiles/Solution.dir/main.c.o.d -o CMakeFiles/Solution.dir/main.c.o -c "/home/joao/Documents/AED ||/AstronautCat/KJM/main.c"
+CMakeFiles/Solution.dir/src/main.c.o: CMakeFiles/Solution.dir/flags.make
+CMakeFiles/Solution.dir/src/main.c.o: src/main.c
+CMakeFiles/Solution.dir/src/main.c.o: CMakeFiles/Solution.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/joao/Documents/AED ||/AstronautCat/KJM/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Solution.dir/src/main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/Solution.dir/src/main.c.o -MF CMakeFiles/Solution.dir/src/main.c.o.d -o CMakeFiles/Solution.dir/src/main.c.o -c "/home/joao/Documents/AED ||/AstronautCat/KJM/src/main.c"
 
-CMakeFiles/Solution.dir/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Solution.dir/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/joao/Documents/AED ||/AstronautCat/KJM/main.c" > CMakeFiles/Solution.dir/main.c.i
+CMakeFiles/Solution.dir/src/main.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Solution.dir/src/main.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/joao/Documents/AED ||/AstronautCat/KJM/src/main.c" > CMakeFiles/Solution.dir/src/main.c.i
 
-CMakeFiles/Solution.dir/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Solution.dir/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/joao/Documents/AED ||/AstronautCat/KJM/main.c" -o CMakeFiles/Solution.dir/main.c.s
+CMakeFiles/Solution.dir/src/main.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Solution.dir/src/main.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/joao/Documents/AED ||/AstronautCat/KJM/src/main.c" -o CMakeFiles/Solution.dir/src/main.c.s
 
 # Object files for target Solution
 Solution_OBJECTS = \
-"CMakeFiles/Solution.dir/main.c.o"
+"CMakeFiles/Solution.dir/src/main.c.o"
 
 # External object files for target Solution
 Solution_EXTERNAL_OBJECTS =
 
-Solution: CMakeFiles/Solution.dir/main.c.o
+Solution: CMakeFiles/Solution.dir/src/main.c.o
 Solution: CMakeFiles/Solution.dir/build.make
 Solution: CMakeFiles/Solution.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/joao/Documents/AED ||/AstronautCat/KJM/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable Solution"

@@ -1,1 +1,1 @@
-/usr/bin/cc CMakeFiles/Solution.dir/main.c.o -o Solution 
+/usr/bin/cc CMakeFiles/Solution.dir/src/main.c.o -o Solution 

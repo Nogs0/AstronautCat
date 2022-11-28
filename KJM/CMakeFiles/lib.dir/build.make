@@ -69,28 +69,28 @@ include CMakeFiles/lib.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/lib.dir/flags.make
 
-CMakeFiles/lib.dir/Func.c.o: CMakeFiles/lib.dir/flags.make
-CMakeFiles/lib.dir/Func.c.o: Func.c
-CMakeFiles/lib.dir/Func.c.o: CMakeFiles/lib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/joao/Documents/AED ||/AstronautCat/KJM/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/lib.dir/Func.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/lib.dir/Func.c.o -MF CMakeFiles/lib.dir/Func.c.o.d -o CMakeFiles/lib.dir/Func.c.o -c "/home/joao/Documents/AED ||/AstronautCat/KJM/Func.c"
+CMakeFiles/lib.dir/lib/Func.c.o: CMakeFiles/lib.dir/flags.make
+CMakeFiles/lib.dir/lib/Func.c.o: lib/Func.c
+CMakeFiles/lib.dir/lib/Func.c.o: CMakeFiles/lib.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/joao/Documents/AED ||/AstronautCat/KJM/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/lib.dir/lib/Func.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/lib.dir/lib/Func.c.o -MF CMakeFiles/lib.dir/lib/Func.c.o.d -o CMakeFiles/lib.dir/lib/Func.c.o -c "/home/joao/Documents/AED ||/AstronautCat/KJM/lib/Func.c"
 
-CMakeFiles/lib.dir/Func.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/lib.dir/Func.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/joao/Documents/AED ||/AstronautCat/KJM/Func.c" > CMakeFiles/lib.dir/Func.c.i
+CMakeFiles/lib.dir/lib/Func.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/lib.dir/lib/Func.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/joao/Documents/AED ||/AstronautCat/KJM/lib/Func.c" > CMakeFiles/lib.dir/lib/Func.c.i
 
-CMakeFiles/lib.dir/Func.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lib.dir/Func.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/joao/Documents/AED ||/AstronautCat/KJM/Func.c" -o CMakeFiles/lib.dir/Func.c.s
+CMakeFiles/lib.dir/lib/Func.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/lib.dir/lib/Func.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/joao/Documents/AED ||/AstronautCat/KJM/lib/Func.c" -o CMakeFiles/lib.dir/lib/Func.c.s
 
 # Object files for target lib
 lib_OBJECTS = \
-"CMakeFiles/lib.dir/Func.c.o"
+"CMakeFiles/lib.dir/lib/Func.c.o"
 
 # External object files for target lib
 lib_EXTERNAL_OBJECTS =
 
-liblib.a: CMakeFiles/lib.dir/Func.c.o
+liblib.a: CMakeFiles/lib.dir/lib/Func.c.o
 liblib.a: CMakeFiles/lib.dir/build.make
 liblib.a: CMakeFiles/lib.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/joao/Documents/AED ||/AstronautCat/KJM/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library liblib.a"
