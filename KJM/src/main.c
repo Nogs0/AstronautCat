@@ -12,7 +12,7 @@ int main()
     CriaLista(&Estoque);
     int acao = 0;
     char option = ' ';
-
+    clearscr();
     printf("********************************************************************************\n");
     printf("\t\tBem vindo ao Astronaut Cat - Soluções em Armazenamento\n");
     printf("********************************************************************************\n");

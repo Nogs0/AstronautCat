@@ -128,6 +128,8 @@ void AdicionandoProduto(Lista *l, Lista *l2) // Função destinada a receber o p
     char Fornecedor[30];
     printf("Entre com o fornecedor do produto: ");
     scanf(" %30[^\n]", Fornecedor);
+    for(int i = 0; i<= strlen(Fornecedor); i++)
+        Fornecedor[i] = toupper(Fornecedor[i]);
     if(InserirMemoria(Fornecedor, l2, 1) == 0) return;
     printf("Você deseja adicionar quantos produtos?\n");
     int n;
