@@ -15,6 +15,7 @@ typedef struct{
     int Mes;
     int Ano;
     char Data[13];
+    int Validade;
 }Produto;
 typedef struct no{
     struct no *ant;
@@ -45,4 +46,5 @@ int ConfereEmp(char*);
 int ConfereCod(char*, Produto*, Lista *);
 int InserirMemoria(char *Empresa, Lista *l, int tipo);
 void PassaInteiro(Produto*);
+int RemoverEstoque(Lista *);
 #endif // HEAD_H_INCLUDED
