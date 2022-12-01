@@ -160,7 +160,7 @@ void AdicionandoProduto(Lista *l, Lista *l2) // Função destinada a receber os 
             else printf("Código não encontrado\n");
 
         }
-        //clearscr();
+        clearscr();
     }
 }
 
@@ -176,6 +176,7 @@ int Remover(Lista *l, char *dado) // Função que remove um  nó da lista, não 
 
     do
     {
+        
         if (strcmp(aux->p.CodigoB, dado) == 0) // o problema se encontra aqui, onde essa condição nunca é verdadeira
         {
             if (aux == l->inicio && aux == l->fim)   // só tem um
@@ -207,7 +208,7 @@ void RemovendoProduto(Lista *l)  // Função que recebe o produto que será remo
     printf("\nDigite o código de barras: ");
     scanf(" %25[^\n]", cod);
     Remover(l, cod);
-    //clearscr();
+    clearscr();
 }
 
 int DataValida(int dia, int mes, int ano)  // Função que verifica se as datas de vencimento inseridas são válidas
@@ -243,7 +244,7 @@ struct tm DataAtual()  // Função que verifica o ano atual, utilizando a biblio
 
 void ConferirValidade(Lista *l) // Função que confere a validade dos itens já em estoque
 {
-    //clearscr();
+    clearscr();
     int i = 0;
     char est[8] = {"estoque"}; // Passa o nome do arquivo txt há ser aberto
     if(InserirMemoria(est, l, 0) == 0) return; // Salvando os itens do txt na memória principal
@@ -252,7 +253,7 @@ void ConferirValidade(Lista *l) // Função que confere a validade dos itens já
     aux = l->inicio;
     do
     {
-        if(DataValida(aux->p.Dia, aux->p.Mes, aux->p.Ano) == 0 && aux->p.Validade != 1) // If que verifica se os produtos estão vencidos
+        if(DataValida(aux->p.Dia, aux->p.Mes, aux->p.Ano) == 0) // If que verifica se os produtos estão vencidos
         {
             char opt;
             aux->p.Validade = 1;
@@ -331,7 +332,7 @@ void SalvandoProdutos(Lista *l) // Função que verifica o chamado para salvar o
         {
             Salvar(*l);
             CriaLista(l);
-            //clearscr();
+            clearscr();
         }
     }
     else
@@ -494,8 +495,8 @@ int RemoverEstoque(Lista *l){ // Função que remove itens vencidos do estoque P
 
     do{
         if(aux->p.Validade == 1){
-            printf("A");
-            //Remover(l, aux->p.CodigoB);
+            //printf("A");
+            Remover(l, aux->p.CodigoB);
         }
         aux = aux->prox;
     }while(aux != l->inicio);
