@@ -46,5 +46,5 @@ int ConfereEmp(char*);
 int ConfereCod(char*, Produto*, Lista *);
 int InserirMemoria(char *Empresa, Lista *l, int tipo);
 void PassaInteiro(Produto*);
-int RemoverEstoque(Lista *);
+void ConsultarEstoque(Lista);
 #endif // HEAD_H_INCLUDED

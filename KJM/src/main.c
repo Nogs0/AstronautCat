@@ -13,12 +13,21 @@ int main()
     int acao = 0;
     char option = ' ';
     clearscr();
-    printf("********************************************************************************\n");
-    printf("\t\tBem vindo ao Astronaut Cat - Soluções em Armazenamento\n");
-    printf("********************************************************************************\n");
     do{
-        printf("O que você deseja fazer?\n");
-        printf("1 - ADICIONAR PRODUTOS À LISTA\n2 - REMOVER PRODUTO DA LISTA\n3 - MOSTRAR LISTA DE ALOCAÇÃO\n4 - CONSULTAR VALIDADE\n5 - SALVAR LISTA\n6 - SAIR\n");
+    printf("*******************************************************************************************************************************\n");
+    printf("\t\t\t\t\tBem vindo ao Astronaut Cat - Soluções em Armazenamento\n\n");
+    printf("*******************************************************************************************************************************\n");
+    
+        printf("\t\t\tO que você deseja fazer?\n\n");
+        printf("\
+                1 - ADICIONAR PRODUTOS À LISTA\n\
+                2 - REMOVER PRODUTO DA LISTA\n\
+                3 - MOSTRAR LISTA DE ALOCAÇÃO\n\
+                4 - CONSULTAR VALIDADE\n\
+                5 - SALVAR LISTA\n\
+                6 - CONSULTAR ESTOQUE\n\
+                7 - SAIR\n\
+            ");
         scanf("%d", &acao);
         clearscr();
         switch (acao){
@@ -41,6 +50,11 @@ int main()
                 break;
             case 5:
                 SalvandoProdutos(&ListadeAlocacao);
+                break;
+            case 6:
+                // InserirMemoria("estoque", &Estoque, 0);
+                // Mostra(Estoque);
+                ConsultarEstoque(Estoque);
                 break;
             default:
                 if(ListadeAlocacao.inicio){

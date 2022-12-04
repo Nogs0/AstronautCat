@@ -45,6 +45,7 @@ int InsereFinal(Lista* l, Produto dado) // Função que insere um produto ao fin
         aux->ant = l->fim;
         return 1;
     }
+
     aux->p = dado;
     aux->ant = l->fim;
     l->fim->prox = aux;
@@ -115,6 +116,7 @@ void Mostra(Lista l) // Função que mostra a lista
             printf("%s\n", aux->p.CodigoB);
             //printf("%s\n", aux->p.Data); // Serve apenas no caso de mostrar o estoque, a lista de alocação possui o campo 'Data' vazio, tornando-a inoperante
             printf("%d/%d/%d\n", aux->p.Dia, aux->p.Mes, aux->p.Ano);
+            //printf("\n%d",aux->p.Validade);
             printf("--------------------------------------\n");
             aux = aux->prox;
         }
@@ -164,39 +166,36 @@ void AdicionandoProduto(Lista *l, Lista *l2) // Função destinada a receber os 
     }
 }
 
-int Remover(Lista *l, char *dado) // Função que remove um  nó da lista, não está funcionando, estamos trabalhando para resolver
+int Remover(Lista *l, char dado[]) // Função que remove um  nó da lista, não está funcionando, estamos trabalhando para resolver
 {
     No *aux;
-    printf("DQD");
     if(l->inicio == NULL)
         return 0;
-
     aux = l->inicio;
-    //strcat(dado, "\n");
-
+    strcat(dado, "\n");
     do
     {
-        
-        if (strcmp(aux->p.CodigoB, dado) == 0) // o problema se encontra aqui, onde essa condição nunca é verdadeira
-        {
-            if (aux == l->inicio && aux == l->fim)   // só tem um
-            {
-                free(aux);   // libera memória
-                l->inicio = l->fim = NULL;  // reinicializa a lista
+        if(strcmp(aux->p.CodigoB, dado) == 0){
+            if(aux == l->inicio && aux == l->fim){
+                free(aux);
+                l->inicio = l->fim = NULL;
+                return 1;
             }
 
-            aux->prox->ant = aux->ant;   // anterior do próximo recebe o anterior de aux
-            aux->ant->prox = aux->prox;  // próximo do anterior recebe o próximo de aux
+            aux->ant->prox = aux->prox;
+            aux->prox->ant = aux->ant;
 
-            if (aux == l->inicio) l->inicio = aux->prox;
-            if (aux == l->fim) l->fim = aux->ant;
+            if(aux == l->inicio)
+                l->inicio = aux->prox;
+            if(aux == l->fim)
+                l->fim = aux->ant;
             free(aux);
             return 1;
         }
         aux = aux->prox;
     }
     while (aux != l->inicio);
-
+    printf("Produto não encontrado\n");
     // se chegou aqui, não achou d
     return 0;
 }
@@ -204,7 +203,6 @@ int Remover(Lista *l, char *dado) // Função que remove um  nó da lista, não 
 void RemovendoProduto(Lista *l)  // Função que recebe o produto que será removido, tornando viável sua localização e remoção
 {
     char cod[30];
-    int option;
     printf("\nDigite o código de barras: ");
     scanf(" %25[^\n]", cod);
     Remover(l, cod);
@@ -247,13 +245,17 @@ void ConferirValidade(Lista *l) // Função que confere a validade dos itens já
     clearscr();
     int i = 0;
     char est[8] = {"estoque"}; // Passa o nome do arquivo txt há ser aberto
-    if(InserirMemoria(est, l, 0) == 0) return; // Salvando os itens do txt na memória principal
-    if(l->inicio == NULL) return;
+    InserirMemoria(est, l, 0); // Salvando os itens do txt na memória principal
+
+    if(l->inicio == NULL){
+        printf("\nEstoque vazio!\n");
+        return;
+    }
     No *aux;
     aux = l->inicio;
-    do
+    do // Enquanto existirem produtos na lista
     {
-        if(DataValida(aux->p.Dia, aux->p.Mes, aux->p.Ano) == 0) // If que verifica se os produtos estão vencidos
+        if(DataValida(aux->p.Dia, aux->p.Mes, aux->p.Ano) == 0 && aux->p.Validade != 1) // if que verifica se os produtos estão vencidos
         {
             char opt;
             aux->p.Validade = 1;
@@ -261,40 +263,41 @@ void ConferirValidade(Lista *l) // Função que confere a validade dos itens já
             printf("%s", aux->p.CodigoB);
             printf("%d/%d/%d", aux->p.Dia, aux->p.Mes, aux->p.Ano);
             printf("\nEste item está vencido!\n\n");
-            i++; 
+            printf("Você gostaria de remover este item do estoque?\n");
+            scanf(" %c", &opt);
+            if(opt == 'y'){
+                Remover(l, aux->p.CodigoB);
+                Salvar(*l);
+                if(l->inicio == NULL)   return;
+            }
+            i++;
         }
         aux = aux->prox;
     }
     while(aux != l->inicio);
-
-    if(i > 0){ // Se existirem produtos vencidos
-        char opt;
-        printf("\nVocê gostaria de remover os itens vencidos do estoque?\n");
-        scanf(" %c", &opt);
-        opt = tolower(opt);
-        if(opt == 'y')
-            RemoverEstoque(l);//chama a função para limpar os itens vencidos dos estoque
+    if(i == 0){
+        printf("Todos os itens do estoque estão dentro da data de validade...\n");
+        return;
     }
-
-
 }
 
 void Salvar(Lista l)
 {
-    char *data[12];
-    if(l.inicio == NULL)
-    {
-        printf("Lista vazia!\n");
-        return;
-    }
+    char data[12];
     FILE *estoque;
-    if((estoque = fopen("./EMP/estoque.txt","a"))) // se conseguir abrir o arquivo do estoque
+    if((estoque = fopen("./EMP/estoque.txt","w+"))) // se conseguir abrir o arquivo do estoque
     {
+        if(l.inicio == NULL){
+                fprintf(estoque, "%c", ' ');
+                fclose(estoque);
+                return;
+        }
         No *aux;
         aux = l.inicio;
         do
         {
-            /*do-while que serve para percorrer a lista em questão e salvar seus dados no txt*/
+            
+            //do-while que serve para percorrer a lista em questão e salvar seus dados no txt
             fprintf(estoque, "%s", aux->p.Descricao); // Função que escreve em um arquivo de texto, passa-se(arquivo, máscara do tipo, variavel a ser inserida)
             fprintf(estoque, "%s", aux->p.CodigoB);
             fprintf(estoque, "%c", '*');
@@ -312,19 +315,20 @@ void Salvar(Lista l)
             aux = aux->prox;
         }
         while(aux != l.inicio);
+        fclose(estoque);
     }
     else printf("Não foi possível abrir o arquivo!\n");
 
-    fclose(estoque); // função necessária sempre ao abrir um arquivo, serve para fecha-lo
+    return; // função necessária sempre ao abrir um arquivo, serve para fecha-lo
 }
 
 void SalvandoProdutos(Lista *l) // Função que verifica o chamado para salvar os itens no txt do estoque
 {
     if(l->inicio != NULL)
     {
-        printf("Você gostaria de alocar estes itens no estoque?\n");
+        printf("Você gostaria de atualizar estes itens no estoque?\n");
         Mostra(*l);
-        printf("[y - n]\n");
+        printf("[y - n]\n"); 
         char opt;
         scanf(" %c", &opt);
         opt = tolower(opt);
@@ -484,24 +488,13 @@ void PassaInteiro(Produto *p) // função utilizada para transferir a data, capt
     }
 }
 
-int RemoverEstoque(Lista *l){ // Função que remove itens vencidos do estoque PROBLEMA IDENTIFICADO
-    FILE *file;
-
-    if((file = fopen("./EMP/estoque.txt", "r+"))){
-    No *aux = NULL;
-
-    aux = l->inicio;
-    if(aux == NULL) return 0;
-
-    do{
-        if(aux->p.Validade == 1){
-            //printf("A");
-            Remover(l, aux->p.CodigoB);
-        }
-        aux = aux->prox;
-    }while(aux != l->inicio);
-    }
-    
-    Salvar(*l);
-    fclose(file);
+void ConsultarEstoque(Lista l){
+    char est[8] = {"estoque"};
+    InserirMemoria(est ,&l, 0);
+    //InserirMemoria("estoque" ,&l, 0);
+    printf("\t\t\t\nA organização possui, dentro do seu estoque: %d itens\n", Tamanho(l));
+    if(Tamanho(l) == 0) return;
+    printf("\t\nSendo eles:\n");
+    Mostra(l);
+    return;
 }
