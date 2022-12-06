@@ -265,16 +265,18 @@ void ConferirValidade(Lista *l) // Função que confere a validade dos itens já
             printf("\nEste item está vencido!\n\n");
             printf("Você gostaria de remover este item do estoque?\n");
             scanf(" %c", &opt);
+            opt = tolower(opt);
             if(opt == 'y'){
                 Remover(l, aux->p.CodigoB);
                 Salvar(*l);
-                if(l->inicio == NULL)   return;
+                //if(l->inicio == NULL) return;
             }
             i++;
         }
         aux = aux->prox;
     }
     while(aux != l->inicio);
+    //Mostra(*l);
     if(i == 0){
         printf("Todos os itens do estoque estão dentro da data de validade...\n");
         return;
@@ -285,7 +287,7 @@ void Salvar(Lista l)
 {
     char data[12];
     FILE *estoque;
-    if((estoque = fopen("./EMP/estoque.txt","w+"))) // se conseguir abrir o arquivo do estoque
+    if((estoque = fopen("./EMP/estoque.txt","w"))) // se conseguir abrir o arquivo do estoque
     {
         if(l.inicio == NULL){
                 fprintf(estoque, "%c", ' ');
@@ -339,8 +341,10 @@ void SalvandoProdutos(Lista *l) // Função que verifica o chamado para salvar o
             clearscr();
         }
     }
-    else
+    else{
+        printf("A lista de alocação encontra-se vazia!\n\n");
         return;
+    }
 
 }
 int ConfereEmp(char *dado) // Função para verificar a existência da empresa
@@ -491,7 +495,6 @@ void PassaInteiro(Produto *p) // função utilizada para transferir a data, capt
 void ConsultarEstoque(Lista l){
     char est[8] = {"estoque"};
     InserirMemoria(est ,&l, 0);
-    //InserirMemoria("estoque" ,&l, 0);
     printf("\t\t\t\nA organização possui, dentro do seu estoque: %d itens\n", Tamanho(l));
     if(Tamanho(l) == 0) return;
     printf("\t\nSendo eles:\n");
