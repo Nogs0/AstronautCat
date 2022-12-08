@@ -40,7 +40,7 @@ int  Tamanho(Lista);
 void Mostra(Lista);
 //void AdicionandoProduto(Lista *, Lista *);
 int  Remover(Lista*, char *);
-void RemovendoProduto(Lista*);
+//void RemovendoProduto(Lista*);
 int  DataValida(int, int, int);
 struct tm DataAtual(void);
 void ConferirValidade(Lista*);
@@ -52,7 +52,7 @@ int InserirMemoria(char *Empresa, Lista *l, int tipo);
 void PassaInteiro(Produto*);
 int RemoverEstoque(Lista *);
 
-
+void RemovendoProduto(Lista*, WINDOW *);
 void MostraNCURSES(WINDOW *win, Lista *l);
 void AdicionandoProduto(Lista *, WINDOW*, char[13], int*, char[11], char[30]);
 void DigitandoData(WINDOW *, char[11]);

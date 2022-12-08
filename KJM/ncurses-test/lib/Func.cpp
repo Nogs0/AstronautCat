@@ -246,13 +246,23 @@ int Remover(Lista *l, char dado[]) // Função que remove um  nó da lista, não
     return 0;
 }
 
-void RemovendoProduto(Lista *l)  // Função que recebe o produto que será removido, tornando viável sua localização e remoção
-{
-    char cod[30];
-    printf("\nDigite o código de barras: ");
-    scanf(" %25[^\n]", cod);
+// void RemovendoProduto(Lista *l)  // Função que recebe o produto que será removido, tornando viável sua localização e remoção
+// {
+//     char cod[30];
+//     printf("\nDigite o código de barras: ");
+//     scanf(" %25[^\n]", cod);
+//     Remover(l, cod);
+//     clearscr();
+// }
+
+void RemovendoProduto(Lista *l, WINDOW *win){
+    refresh();
+    box(stdscr, 0, 0);
+    refresh();
+    char cod[20];
+    DigitandoCodigo(win, cod);
     Remover(l, cod);
-    clearscr();
+    wrefresh(win);
 }
 
 int DataValida(Produto prod)  // Função que verifica se as datas de vencimento inseridas são válidas

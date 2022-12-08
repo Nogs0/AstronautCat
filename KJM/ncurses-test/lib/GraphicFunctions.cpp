@@ -74,6 +74,7 @@ void PreencherJanelaEmpresas(WINDOW* win2, char *empresaAtual, int *tela, char e
 }
 
 void DigitandoCodigo(WINDOW *win, char cod[14])
+
 {
 	
 	memset(cod, '\0', 14);							//reseta o vetor 

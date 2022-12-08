@@ -38,9 +38,10 @@ int main()
     InserirMemoria(empresaAtual, &listaProdutos, 0);
     //a Lista "listaProdutos" agora possui todos os produtos da empresa selecionada.
     
-   // MostraNCURSES(JanelaEntrada, &listaProdutos);
+    //MostraNCURSES(JanelaEntrada, &listaProdutos);
     AdicionandoProduto(&listaProdutos, JanelaEntrada, cod, &tela, data, empresaAtual);
     
+    //RemovendoProduto(&listaProdutos, JanelaEmpresas);
     mvwprintw(JanelaEntrada, 1, 1, "cheguei");
     while(1);
    
