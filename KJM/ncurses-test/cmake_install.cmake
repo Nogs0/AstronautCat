@@ -1,4 +1,4 @@
-# Install script for directory: /home/matheus-68/Documents/PUC/SEGUNDO-SEMESTRE/LAB-AED-II/MY-BRENCH/chernobyl
+# Install script for directory: /home/joao/Documents/AED ||/AstronautCat/KJM/ncurses-test
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/matheus-68/Documents/PUC/SEGUNDO-SEMESTRE/LAB-AED-II/MY-BRENCH/chernobyl/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/joao/Documents/AED ||/AstronautCat/KJM/ncurses-test/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

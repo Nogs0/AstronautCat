@@ -255,20 +255,21 @@ void RemovendoProduto(Lista *l)  // Função que recebe o produto que será remo
     clearscr();
 }
 
-int DataValida(int dia, int mes, int ano)  // Função que verifica se as datas de vencimento inseridas são válidas
+int DataValida(Produto prod)  // Função que verifica se as datas de vencimento inseridas são válidas
 {
+
     struct tm atual;
     atual = DataAtual();
-    if(ano == atual.tm_year) // verifica se o ano inserido é igual ao ano atual
-        if(mes >= atual.tm_mon && mes <=12){ //se o mês for maior ou igual ao atual  && menor ou igual a 12 é válida
-            if(dia >= atual.tm_mday && dia <=30) // se o dia for maior ou igual ao atual && menor ou igual a 30 é válida
+    if(prod.Ano == atual.tm_year) // verifica se o ano inserido é igual ao ano atual
+        if(prod.Mes >= atual.tm_mon && prod.Mes <=12){ //se o mês for maior ou igual ao atual  && menor ou igual a 12 é válida
+            if(prod.Dia>= atual.tm_mday && prod.Dia <=30) // se o dia for maior ou igual ao atual && menor ou igual a 30 é válida
                 return 1;
             else return 0;
         }
         else return 0;
 
-    if(ano > atual.tm_year) // se o ano for maior que o atual e os dias e meses válidos, aceita
-        if(dia <= 30 && mes <=12)
+    if(prod.Ano > atual.tm_year) // se o ano for maior que o atual e os dias e meses válidos, aceita
+        if(prod.Dia <= 30 && prod.Mes <=12)
             return 1;
 
     return 0;
@@ -301,7 +302,7 @@ void ConferirValidade(Lista *l) // Função que confere a validade dos itens já
     aux = l->inicio;
     do // Enquanto existirem produtos na lista
     {
-        if(DataValida(aux->p.Dia, aux->p.Mes, aux->p.Ano) == 0 && aux->p.Validade != 1) // if que verifica se os produtos estão vencidos
+        if(DataValida(aux->p) == 0 && aux->p.Validade != 1) // if que verifica se os produtos estão vencidos
         {
             char opt;
             aux->p.Validade = 1;
