@@ -345,16 +345,17 @@ int DataValida(WINDOW *win, Produto *prod)  // Função que verifica se as datas
         else return 0;
         
 
-    if(prod->Ano > atual.tm_year) // se o ano for maior que o atual e os dias e meses válidos, aceita
+    if(prod->Ano > atual.tm_year){ // se o ano for maior que o atual e os dias e meses válidos, aceita
         if(prod->Dia <= 30 && prod->Mes <=12)
         
             return 1;
-    wattron(win, A_BLINK);
-    wattron(win, A_BOLD); 
-    mvwprintw(win, 13, 5, "*Digite uma data valida !*");
-    wattroff(win, A_BOLD); 
-    wattroff(win, A_BLINK);
-    wrefresh(win);
+    }
+    // wattron(win, A_BLINK);
+    // wattron(win, A_BOLD); 
+    // mvwprintw(win, 13, 5, "*Digite uma data valida !*");
+    // wattroff(win, A_BOLD); 
+    // wattroff(win, A_BLINK);
+    // wrefresh(win);
             
     return 0;
 }
@@ -382,13 +383,14 @@ void ConferirValidade(WINDOW* win, Lista *l) // Função que confere a validade 
         mvwprintw(win, 1, 1, "\nEstoque vazio!\n");
         return;
     }
+
     No *aux;
     aux = l->inicio;
     do // Enquanto existirem produtos na lista
     {
         if(DataValida(win, &aux->p) == 0 && aux->p.Validade != 1) // if que verifica se os produtos estão vencidos
         {
-            
+                
                 char opt;
                 aux->p.Validade = 1;
                 int j = 2;
@@ -397,20 +399,23 @@ void ConferirValidade(WINDOW* win, Lista *l) // Função que confere a validade 
                 mvwprintw(win, ++j, 3,"%d/%d/%d", aux->p.Dia, aux->p.Mes, aux->p.Ano);
                 mvwprintw(win, ++j, 3,"Este item está vencido!");
                 mvwprintw(win, ++j, 3,"Você gostaria de remover este item do estoque?");
-                wrefresh(win);
+                wrefresh(win);wrefresh(win);
                 scanf(" %c", &opt);
+                opt = tolower(opt);
                 if(opt == 'y'){
                     Remover(l, aux->p.CodigoB);
                     char opt2[3] = "w+";
                     Salvar(win, *l, opt2);
                     if(l->inicio == NULL)   return;
                 }
+                wclear(win);
                 i++;
-            
+        
         }
         aux = aux->prox;
-    }
-    while(aux != l->inicio);
+    } while(aux != l->inicio);
+    
+    
     if(i == 0){
         wattron(win, A_BOLD);
         char text[50] = "** O ESTOQUE NAO POSSUI ITENS VENCIDOS **";
@@ -570,7 +575,7 @@ int InserirMemoria(char *Empresa, Lista *l, int tipo)  // Função que passa tod
         int i = 0;
         Produto prod;
         char aux[30] = {"./EMP/"};
-        char codigo[300];
+        char codigo[200];
         char data[13];
         while(Empresa[i] != '\n')
             i++;
@@ -582,11 +587,11 @@ int InserirMemoria(char *Empresa, Lista *l, int tipo)  // Função que passa tod
         {
             do
             {
-                fgets(codigo, 300, Arq);
+                fgets(codigo, 200, Arq);
                 strcpy(prod.Descricao, codigo);
-                memset(codigo, '\0', 300);
+                memset(codigo, '\0', 200);
 
-                fgets(codigo, 300, Arq);
+                fgets(codigo, 200, Arq);
                 strcpy(prod.CodigoB, codigo);
                 if(prod.Descricao[0] != '\0' && prod.CodigoB[0] != '\0')
                 InsereFinal(l, prod);
@@ -604,6 +609,7 @@ int InserirMemoria(char *Empresa, Lista *l, int tipo)  // Função que passa tod
 
                 fgets(codigo, 200, Arq);
                 strcpy(prod.CodigoB, codigo);
+                memset(codigo, '\0', 200);
                 fgets(codigo, 200, Arq);
                 strcpy(prod.Data, codigo);
                 PassaInteiro(&prod);

@@ -268,7 +268,7 @@ void MostrarEmpresas(WINDOW *win, int altura, char empresas[][30], int highlight
 	int j = 0;
 	box(win, 0,0);
 	wattron(win, A_BOLD);
-	char text[35] = "(<F1)SELECIONE A EMPRESA: (F2>)";
+	char text[35] = "(<F1) SELECIONE A EMPRESA (F2>)";
 	mvwprintw(win,1, (getmaxx(win)/2) - (strlen(text)/2), "%s", text);
 
 	wattroff(win, A_BOLD);

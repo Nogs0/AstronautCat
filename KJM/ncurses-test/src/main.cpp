@@ -64,14 +64,13 @@ int main()
                     break;
                 }
                 case 4:
-                    werase(JanelaEntrada);
+                     werase(JanelaEntrada);
                     wrefresh(JanelaEntrada);
                     JanelaEntrada = DesenharJanelaEntrada(COLUNAS, LINHAS);
-                    wclear(JanelaEntrada);
-                    box(JanelaEntrada, 1,0);
-                    wrefresh(JanelaEntrada);
+                   
                     ConferirValidade(JanelaEntrada, &listaValidade);
                     CriaLista(&listaValidade);
+                    wrefresh(JanelaEntrada);
                     break;
                 case 5:
                 {
