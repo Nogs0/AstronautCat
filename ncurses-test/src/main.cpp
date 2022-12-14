@@ -53,7 +53,7 @@ int main()
                     break;
                 case 2:
                     delwin(JanelaOPT);
-                    //refresh();
+                    RemovendoProduto(&listaAlocacao, JanelaEntrada);
                     break;
                 case 3:
                 {

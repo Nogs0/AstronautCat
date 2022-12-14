@@ -321,9 +321,8 @@ int Remover(Lista *l, char dado[]) // Função que remove um  nó da lista, não
 // }
 
 void RemovendoProduto(Lista *l, WINDOW *win){
-    refresh();
-    box(stdscr, 0, 0);
-    refresh();
+    box(win, 0, 0);
+    wrefresh(win);
     char cod[20];
     DigitandoCodigo(win, cod);
     Remover(l, cod);
