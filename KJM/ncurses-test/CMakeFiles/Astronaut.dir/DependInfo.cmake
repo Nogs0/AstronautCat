@@ -8,12 +8,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/joao/Documents/AED ||/AstronautCat/KJM/ncurses-test/src/main.cpp" "CMakeFiles/Astronaut.dir/src/main.cpp.o" "gcc" "CMakeFiles/Astronaut.dir/src/main.cpp.o.d"
+  "/home/matheus-68/Documents/PUC/SEGUNDO-SEMESTRE/LAB-AED-II/MY-BRENCH/ncurses-test/AstronautCat/KJM/ncurses-test/src/main.cpp" "CMakeFiles/Astronaut.dir/src/main.cpp.o" "gcc" "CMakeFiles/Astronaut.dir/src/main.cpp.o.d"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/joao/Documents/AED ||/AstronautCat/KJM/ncurses-test/CMakeFiles/lib.dir/DependInfo.cmake"
+  "/home/matheus-68/Documents/PUC/SEGUNDO-SEMESTRE/LAB-AED-II/MY-BRENCH/ncurses-test/AstronautCat/KJM/ncurses-test/CMakeFiles/lib.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

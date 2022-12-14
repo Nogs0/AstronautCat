@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/joao/Documents/AED ||/AstronautCat/KJM/ncurses-test/lib/Func.cpp" "CMakeFiles/lib.dir/lib/Func.cpp.o" "gcc" "CMakeFiles/lib.dir/lib/Func.cpp.o.d"
-  "/home/joao/Documents/AED ||/AstronautCat/KJM/ncurses-test/lib/GraphicFunctions.cpp" "CMakeFiles/lib.dir/lib/GraphicFunctions.cpp.o" "gcc" "CMakeFiles/lib.dir/lib/GraphicFunctions.cpp.o.d"
+  "/home/matheus-68/Documents/PUC/SEGUNDO-SEMESTRE/LAB-AED-II/MY-BRENCH/ncurses-test/AstronautCat/KJM/ncurses-test/lib/Func.cpp" "CMakeFiles/lib.dir/lib/Func.cpp.o" "gcc" "CMakeFiles/lib.dir/lib/Func.cpp.o.d"
+  "/home/matheus-68/Documents/PUC/SEGUNDO-SEMESTRE/LAB-AED-II/MY-BRENCH/ncurses-test/AstronautCat/KJM/ncurses-test/lib/GraphicFunctions.cpp" "CMakeFiles/lib.dir/lib/GraphicFunctions.cpp.o" "gcc" "CMakeFiles/lib.dir/lib/GraphicFunctions.cpp.o.d"
   )
 
 # Targets to which this target links.

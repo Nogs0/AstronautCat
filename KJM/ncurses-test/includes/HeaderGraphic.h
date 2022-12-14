@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <curses.h>
 #include <string.h>
-#include <locale.h>
 #include <time.h>
 #include <ctype.h>
 
@@ -39,12 +38,12 @@ int  InsereOrdenado(Lista *, Produto);
 int  Tamanho(Lista);
 void Mostra(Lista);
 //void AdicionandoProduto(Lista *, Lista *);
-int  Remover(Lista*, char *);
+int Remover(Lista*, char *);
 //void RemovendoProduto(Lista*);
-int  DataValida(int, int, int);
+int DataValida(Produto *prod);
 struct tm DataAtual(void);
-void ConferirValidade(Lista*);
-void Salvar(Lista);
+void ConferirValidade(WINDOW*, Lista* );
+void Salvar(Lista, char[2]);
 void SalvandoProdutos(Lista*);
 int ConfereEmp(char*);
 int ConfereCod(char*, Produto*, Lista *);
@@ -52,16 +51,19 @@ int InserirMemoria(char *Empresa, Lista *l, int tipo);
 void PassaInteiro(Produto*);
 int RemoverEstoque(Lista *);
 
+void MostrarOPT(WINDOW *, int , int , char[][100]);
+int preencherJanelaOPT(WINDOW *);
 void RemovendoProduto(Lista*, WINDOW *);
-void MostraNCURSES(WINDOW *win, Lista *l);
-void AdicionandoProduto(Lista *, WINDOW*, char[13], int*, char[11], char[30]);
+void MostraNCURSES(WINDOW *win, Lista *l, char *);
+void AdicionandoProduto(Lista *l, Lista *l2, WINDOW* win, char cod[13], char data[11], char empresa[30]);
 void DigitandoData(WINDOW *, char[11]);
 void capturandoTeclado(WINDOW*, char *, int, int,int);
 void DigitandoCodigo(WINDOW*, char[14]);
-void MostrarEmpresas(WINDOW*, int, char[][30],int);
+void MostrarEmpresas(WINDOW*, int, char[][30],int,int);
 void CriarVetorEmpresas(WINDOW *, char [][30]);
-void PreencherJanelaEmpresas(WINDOW* win2, char *, int *, char [][30], WINDOW*, int, int);
-void PreencherJanelaEntrada(WINDOW *, char *, int *);
+int PreencherJanelaEmpresas(Lista *listaAlocacao, WINDOW* win2, char *empresaAtual, char empresas[][30], WINDOW* win, int COLUNAS, int LINHAS);
+void PreencherJanelaEntrada(WINDOW *, char *);
+WINDOW *DesenharJanelaOPT(int, int);
 WINDOW *DesenharJanelaEmpresas(int, int);
 WINDOW *DesenharJanelaEntrada(int, int );
 

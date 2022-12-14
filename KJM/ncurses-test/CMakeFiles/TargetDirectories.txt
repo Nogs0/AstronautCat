@@ -1,4 +1,4 @@
-/home/joao/Documents/AED ||/AstronautCat/KJM/ncurses-test/CMakeFiles/lib.dir
-/home/joao/Documents/AED ||/AstronautCat/KJM/ncurses-test/CMakeFiles/Astronaut.dir
-/home/joao/Documents/AED ||/AstronautCat/KJM/ncurses-test/CMakeFiles/edit_cache.dir
-/home/joao/Documents/AED ||/AstronautCat/KJM/ncurses-test/CMakeFiles/rebuild_cache.dir
+/home/matheus-68/Documents/PUC/SEGUNDO-SEMESTRE/LAB-AED-II/MY-BRENCH/ncurses-test/AstronautCat/KJM/ncurses-test/CMakeFiles/lib.dir
+/home/matheus-68/Documents/PUC/SEGUNDO-SEMESTRE/LAB-AED-II/MY-BRENCH/ncurses-test/AstronautCat/KJM/ncurses-test/CMakeFiles/Astronaut.dir
+/home/matheus-68/Documents/PUC/SEGUNDO-SEMESTRE/LAB-AED-II/MY-BRENCH/ncurses-test/AstronautCat/KJM/ncurses-test/CMakeFiles/edit_cache.dir
+/home/matheus-68/Documents/PUC/SEGUNDO-SEMESTRE/LAB-AED-II/MY-BRENCH/ncurses-test/AstronautCat/KJM/ncurses-test/CMakeFiles/rebuild_cache.dir

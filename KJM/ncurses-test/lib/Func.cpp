@@ -6,6 +6,7 @@ void clearscr(void) // Função fornecida pelo claudinho para limpar a tela
     printf("\033[H\033[J");
     return;
 }
+
 void CriaLista(Lista *l) // Função que cria lista apontando seus dois ponteiros de início e fim para nulo NECESSÁRIA TODA VEZ QUE INICIAR UMA NOVA LISTA
 {
     l->inicio = NULL;
@@ -89,6 +90,7 @@ int InsereOrdenado(Lista *l, Produto dado) // Funçã que insere ordenado na lis
     }
     return 1;
 }
+
 int Tamanho(Lista l) // Função que retorna o tamanho da lista
 {
     No *aux = NULL;
@@ -103,25 +105,57 @@ int Tamanho(Lista l) // Função que retorna o tamanho da lista
     while(aux != l.inicio);
     return tam;
 }
-void MostraNCURSES(WINDOW *win, Lista *l)			//semelhante a função padrão MOSTRA para listas, porém com saída em NCURSES.
+
+void MostraNCURSES(WINDOW *win, Lista *l, char *titulo)			//semelhante a função padrão MOSTRA para listas, porém com saída em NCURSES.
 {
-int i = 3;
+    
+    box(win, 1, 0);
+    int i = 2;
+    int n = 0;
+    int lenght = 0;
+    char aux2[150] = {}; 
     No *aux;
-    if(l->inicio == NULL) mvwprintw(win, i, 3, "Lista vazia!\n");
+    wattron(win, A_DIM);
+    mvwprintw(win,1, (getmaxx(win)/2) - (strlen(titulo)/2), titulo);
+    wattroff(win, A_DIM);
+    if(l->inicio == NULL) {
+        
+        mvwprintw(win, i, 3, "Lista vazia!\n");
+        wrefresh(win);
+    }
     else
     {
         aux = l->inicio;
         do
         {
-            mvwprintw(win, i, 3, "%s\n", aux->p.Descricao);
-            mvwprintw(win, i+1, 3, "%s\n", aux->p.CodigoB);
+            if (n % 2 == 0)
+                wattron(win, A_DIM);
+            if (strlen(aux->p.Descricao) > getmaxx(win) - 10){
+                int i = 0;
+                for (i = 0; i < getmaxx(win) - 10; i++)
+                {
+                    aux2[i] = aux->p.Descricao[i];
+                }
+            for (i = getmaxx(win) - 10; i < getmaxx(win) - 7; i++)
+                aux2[i] = '.';
+            aux2[i] = '\0';
+            }
+            else
+                strcpy(aux2, aux->p.Descricao);
+            
+            int j = 3;
+            mvwprintw(win, ++i, j, "%s", aux2);
+            mvwprintw(win, ++i, j, "%s", aux->p.CodigoB);
+            mvwprintw(win, ++i, j, "%s\n", aux->p.Data);
 			wrefresh(win);
             aux = aux->prox;
             i = i + 1;
+            n++;
+            wattroff(win, A_DIM);
         }
         while(aux != l->inicio);
     }
-    while(1);
+    
 }
 
 void Mostra(Lista l) // Função que mostra a lista
@@ -145,7 +179,7 @@ void Mostra(Lista l) // Função que mostra a lista
     }
 }
 
-void AdicionandoProduto(Lista *l, WINDOW* win, char cod[13], int *tela, char data[11], char empresa[30])
+void AdicionandoProduto(Lista *l, Lista *l2, WINDOW* win, char cod[13], char data[11], char empresa[30])
 {
     
 
@@ -154,21 +188,25 @@ void AdicionandoProduto(Lista *l, WINDOW* win, char cod[13], int *tela, char dat
         strcpy(aux.CodigoB, cod);
 
         memset(aux.Descricao, '\0', 200);
-        if(ConfereCod(empresa, &aux, l))
-        {
-            
-        }
-
-        
+        ConfereCod(empresa, &aux, l);
         mvwprintw(win, 10,5 , "%s", aux.Descricao);
         DigitandoData(win, data);
-        mvwprintw(win, 1, 1, "%s", data);
-        mvwprintw(win, 2, 2, "%s", cod);
-        wrefresh(win);
-        while(1);
+        strcpy(aux.Data, data);
+        PassaInteiro(&aux);
 
-   
+        while(DataValida(&aux) == 0){
+            DigitandoData(win, data);
+            strcpy(aux.Data, data);
+             PassaInteiro(&aux);
+            
+        }
+        InsereOrdenado(l2, aux);
+        mvwprintw(win, 15,5, "Tudo ok, produto adicionado a lista de alocacao !");
+        wrefresh(win);
+        keypad(win, FALSE);
 }
+
+
 
 /*void AdicionandoProduto(Lista *l, Lista *l2) // Função destinada a receber os dados de um item, transformando-o em um Produto para a função InsereOrdenado
 {
@@ -265,21 +303,21 @@ void RemovendoProduto(Lista *l, WINDOW *win){
     wrefresh(win);
 }
 
-int DataValida(Produto prod)  // Função que verifica se as datas de vencimento inseridas são válidas
+int DataValida(Produto *prod)  // Função que verifica se as datas de vencimento inseridas são válidas
 {
 
     struct tm atual;
     atual = DataAtual();
-    if(prod.Ano == atual.tm_year) // verifica se o ano inserido é igual ao ano atual
-        if(prod.Mes >= atual.tm_mon && prod.Mes <=12){ //se o mês for maior ou igual ao atual  && menor ou igual a 12 é válida
-            if(prod.Dia>= atual.tm_mday && prod.Dia <=30) // se o dia for maior ou igual ao atual && menor ou igual a 30 é válida
+    if(prod->Ano == atual.tm_year) // verifica se o ano inserido é igual ao ano atual
+        if(prod->Mes >= atual.tm_mon && prod->Mes <=12){ //se o mês for maior ou igual ao atual  && menor ou igual a 12 é válida
+            if(prod->Dia>= atual.tm_mday && prod->Dia <=30) // se o dia for maior ou igual ao atual && menor ou igual a 30 é válida
                 return 1;
             else return 0;
         }
         else return 0;
 
-    if(prod.Ano > atual.tm_year) // se o ano for maior que o atual e os dias e meses válidos, aceita
-        if(prod.Dia <= 30 && prod.Mes <=12)
+    if(prod->Ano > atual.tm_year) // se o ano for maior que o atual e os dias e meses válidos, aceita
+        if(prod->Dia <= 30 && prod->Mes <=12)
             return 1;
 
     return 0;
@@ -297,53 +335,63 @@ struct tm DataAtual()  // Função que verifica o ano atual, utilizando a biblio
     return aux;
 }
 
-void ConferirValidade(Lista *l) // Função que confere a validade dos itens já em estoque
+void ConferirValidade(WINDOW* win, Lista *l) // Função que confere a validade dos itens já em estoque
 {
-    clearscr();
+
     int i = 0;
     char est[8] = {"estoque"}; // Passa o nome do arquivo txt há ser aberto
     InserirMemoria(est, l, 0); // Salvando os itens do txt na memória principal
 
     if(l->inicio == NULL){
-        printf("\nEstoque vazio!\n");
+        mvwprintw(win, 1, 1, "\nEstoque vazio!\n");
         return;
     }
     No *aux;
     aux = l->inicio;
     do // Enquanto existirem produtos na lista
     {
-        if(DataValida(aux->p) == 0 && aux->p.Validade != 1) // if que verifica se os produtos estão vencidos
+        if(DataValida(&aux->p) == 0 && aux->p.Validade != 1) // if que verifica se os produtos estão vencidos
         {
-            char opt;
-            aux->p.Validade = 1;
-            printf("%s", aux->p.Descricao);
-            printf("%s", aux->p.CodigoB);
-            printf("%d/%d/%d", aux->p.Dia, aux->p.Mes, aux->p.Ano);
-            printf("\nEste item está vencido!\n\n");
-            printf("Você gostaria de remover este item do estoque?\n");
-            scanf(" %c", &opt);
-            if(opt == 'y'){
-                Remover(l, aux->p.CodigoB);
-                Salvar(*l);
-                if(l->inicio == NULL)   return;
-            }
-            i++;
+            
+                char opt;
+                aux->p.Validade = 1;
+                int j = 2;
+                mvwprintw(win, ++j, 3, "%s", aux->p.Descricao);
+                mvwprintw(win, ++j, 3,"%s", aux->p.CodigoB);
+                mvwprintw(win, ++j, 3,"%d/%d/%d", aux->p.Dia, aux->p.Mes, aux->p.Ano);
+                mvwprintw(win, ++j, 3,"Este item está vencido!");
+                mvwprintw(win, ++j, 3,"Você gostaria de remover este item do estoque?");
+                wrefresh(win);
+                scanf(" %c", &opt);
+                if(opt == 'y'){
+                    Remover(l, aux->p.CodigoB);
+                    Salvar(*l, "w+");
+                    if(l->inicio == NULL)   return;
+                }
+                i++;
+            
         }
         aux = aux->prox;
     }
     while(aux != l->inicio);
     if(i == 0){
-        printf("Todos os itens do estoque estão dentro da data de validade...\n");
+        wattron(win, A_BOLD);
+        mvwprintw(win, 2,4, "O estoque nao possui itens vencidos ");
+        wattroff(win, A_BOLD);
+        wrefresh(win);
         return;
     }
+    wrefresh(win);
 }
 
-void Salvar(Lista l)
+void Salvar(Lista l, char opt[2])
 {
     char data[12];
     FILE *estoque;
-    if((estoque = fopen("./EMP/estoque.txt","w+"))) // se conseguir abrir o arquivo do estoque
-    {
+
+    //if (opt == 1)
+    if((estoque = fopen("./EMP/estoque.txt",opt))) {// se conseguir abrir o arquivo do estoque
+
         if(l.inicio == NULL){
                 fprintf(estoque, "%c", ' ');
                 fclose(estoque);
@@ -391,7 +439,7 @@ void SalvandoProdutos(Lista *l) // Função que verifica o chamado para salvar o
         opt = tolower(opt);
         if(opt == 'y')
         {
-            Salvar(*l);
+            Salvar(*l, "a");
             CriaLista(l);
             clearscr();
         }
@@ -400,6 +448,7 @@ void SalvandoProdutos(Lista *l) // Função que verifica o chamado para salvar o
         return;
 
 }
+
 int ConfereEmp(char *dado) // Função para verificar a existência da empresa
 {
     FILE *Arquivo;
@@ -420,8 +469,6 @@ int ConfereEmp(char *dado) // Função para verificar a existência da empresa
     printf("Empresa não existente\n");
     return 0;
 }
-
-
 
 int ConfereCod(char *dado, Produto *produto, Lista *l2) // Função que verifica a existência do código de barras na base da empresa e retorna sua descrição para o produto
 {
@@ -463,21 +510,23 @@ int InserirMemoria(char *Empresa, Lista *l, int tipo)  // Função que passa tod
         int i = 0;
         Produto prod;
         char aux[30] = {"./EMP/"};
-        char codigo[200];
+        char codigo[300];
         char data[13];
         while(Empresa[i] != '\n')
             i++;
         strncat(aux, Empresa, i);
         strcat(aux, ".txt");
+        
         if((Arq = fopen(aux, "r")) == NULL) return 0;
         if(tipo == 1) // primeiro uso da função, utilizada pra salvar itens na lista das empresas 
         {
             do
             {
-                fgets(codigo, 200, Arq);
+                fgets(codigo, 300, Arq);
                 strcpy(prod.Descricao, codigo);
-                memset(codigo, '\0', 200);
-                fgets(codigo, 200, Arq);
+                memset(codigo, '\0', 300);
+
+                fgets(codigo, 300, Arq);
                 strcpy(prod.CodigoB, codigo);
                 if(prod.Descricao[0] != '\0' && prod.CodigoB[0] != '\0')
                 InsereFinal(l, prod);
@@ -492,6 +541,7 @@ int InserirMemoria(char *Empresa, Lista *l, int tipo)  // Função que passa tod
                 fgets(codigo, 200, Arq);
                 strcpy(prod.Descricao, codigo);
                 memset(codigo, '\0', 200);
+
                 fgets(codigo, 200, Arq);
                 strcpy(prod.CodigoB, codigo);
                 fgets(codigo, 200, Arq);
@@ -514,25 +564,32 @@ void PassaInteiro(Produto *p) // função utilizada para transferir a data, capt
     if(p->Data)
     {
         char auxdia[3], auxmes[3], auxano[5], a;
-        int i = 1, j=0;
-
-        while(i<3)
+        int i = 0, j=0;
+        
+        //0123456789  10
+        //18/05/2046  \0
+        if (p->Data[0] == '*')
+            i = 1;
+        int k = i;
+        while(i < k+2)
         {
             auxdia[j] = p->Data[i];
             i++;
             j++;
         }
-        i = 4;
+        i = k+3;
+        k = i;
         j = 0;
-        while(i<6)
+        while(i<k+2)
         {
             auxmes[j] = p->Data[i];
             i++;
             j++;
         }
-        i = 7;
+        i = k+3;
+        k = i;
         j = 0;
-        while(i<11)
+        while(i<k+5)
         {
             auxano[j] = p->Data[i];
             i++;
