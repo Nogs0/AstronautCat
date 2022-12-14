@@ -31,12 +31,12 @@ typedef struct{
 }Lista;
 
 
-void clearscr(void);
+// void clearscr(void);
 void CriaLista(Lista *);
 int  InsereFinal(Lista *, Produto);
 int  InsereOrdenado(Lista *, Produto);
-int  Tamanho(Lista);
-void Mostra(Lista);
+//int  Tamanho(Lista);
+//void Mostra(Lista);
 //void AdicionandoProduto(Lista *, Lista *);
 int Remover(Lista*, char *);
 //void RemovendoProduto(Lista*);
@@ -45,11 +45,11 @@ struct tm DataAtual(void);
 void ConferirValidade(WINDOW*, Lista* );
 void Salvar(WINDOW*, Lista, char[2]);
 //void SalvandoProdutos(Lista*);
-int ConfereEmp(char*);
+//int ConfereEmp(char*);
 int ConfereCod(WINDOW*, char*, Produto*, Lista *);
 int InserirMemoria(char *Empresa, Lista *l, int tipo);
 void PassaInteiro(Produto*);
-int RemoverEstoque(Lista *);
+//int RemoverEstoque(Lista *);
 
 void MostrarOPT(WINDOW *, int , int , char[][100]);
 int preencherJanelaOPT(WINDOW *);

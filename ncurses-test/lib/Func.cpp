@@ -1,11 +1,11 @@
 #include "../includes/HeaderGraphic.h"
 
-void clearscr(void) // Função fornecida pelo claudinho para limpar a tela
-{
-    printf("\033c");
-    printf("\033[H\033[J");
-    return;
-}
+// void clearscr(void) // Função fornecida pelo claudinho para limpar a tela
+// {
+//     printf("\033c");
+//     printf("\033[H\033[J");
+//     return;
+// }
 
 void CriaLista(Lista *l) // Função que cria lista apontando seus dois ponteiros de início e fim para nulo NECESSÁRIA TODA VEZ QUE INICIAR UMA NOVA LISTA
 {
@@ -91,24 +91,23 @@ int InsereOrdenado(Lista *l, Produto dado) // Funçã que insere ordenado na lis
     return 1;
 }
 
-int Tamanho(Lista l) // Função que retorna o tamanho da lista
-{
-    No *aux = NULL;
-    if(l.inicio == NULL) return 0;
-    int tam = 0;
-    aux = l.inicio;
-    do
-    {
-        tam++;
-        aux = aux->prox;
-    }
-    while(aux != l.inicio);
-    return tam;
-}
+// int Tamanho(Lista l) // Função que retorna o tamanho da lista
+// {
+//     No *aux = NULL;
+//     if(l.inicio == NULL) return 0;
+//     int tam = 0;
+//     aux = l.inicio;
+//     do
+//     {
+//         tam++;
+//         aux = aux->prox;
+//     }
+//     while(aux != l.inicio);
+//     return tam;
+// }
 
 void MostraNCURSES(WINDOW *win, Lista *l, char *titulo)			//semelhante a função padrão MOSTRA para listas, porém com saída em NCURSES.
 {
-    
     box(win, 1, 0);
     int i = 2;
     int n = 0;
@@ -160,26 +159,26 @@ void MostraNCURSES(WINDOW *win, Lista *l, char *titulo)			//semelhante a funçã
     
 }
 
-void Mostra(Lista l) // Função que mostra a lista
-{
-    No *aux;
-    if(l.inicio == NULL) printf("Lista vazia!\n");
-    else
-    {
-        aux = l.inicio;
-        do
-        {
-            printf("%s\n", aux->p.Descricao);
-            printf("%s\n", aux->p.CodigoB);
-            //printf("%s\n", aux->p.Data); // Serve apenas no caso de mostrar o estoque, a lista de alocação possui o campo 'Data' vazio, tornando-a inoperante
-            printf("%d/%d/%d\n", aux->p.Dia, aux->p.Mes, aux->p.Ano);
-            //printf("\n%d",aux->p.Validade);
-            printf("--------------------------------------\n");
-            aux = aux->prox;
-        }
-        while(aux != l.inicio);
-    }
-}
+// void Mostra(Lista l) // Função que mostra a lista
+// {
+//     No *aux;
+//     if(l.inicio == NULL) printf("Lista vazia!\n");
+//     else
+//     {
+//         aux = l.inicio;
+//         do
+//         {
+//             printf("%s\n", aux->p.Descricao);
+//             printf("%s\n", aux->p.CodigoB);
+//             //printf("%s\n", aux->p.Data); // Serve apenas no caso de mostrar o estoque, a lista de alocação possui o campo 'Data' vazio, tornando-a inoperante
+//             printf("%d/%d/%d\n", aux->p.Dia, aux->p.Mes, aux->p.Ano);
+//             //printf("\n%d",aux->p.Validade);
+//             printf("--------------------------------------\n");
+//             aux = aux->prox;
+//         }
+//         while(aux != l.inicio);
+//     }
+// }
 
 void AdicionandoProduto(Lista *l, Lista *l2, WINDOW* win, char cod[13], char data[11], char empresa[30])
 {
@@ -311,18 +310,12 @@ int Remover(Lista *l, char dado[]) // Função que remove um  nó da lista, não
     return 0;
 }
 
-// void RemovendoProduto(Lista *l)  // Função que recebe o produto que será removido, tornando viável sua localização e remoção
-// {
-//     char cod[30];
-//     printf("\nDigite o código de barras: ");
-//     scanf(" %25[^\n]", cod);
-//     Remover(l, cod);
-//     clearscr();
-// }
-
 void RemovendoProduto(Lista *l, WINDOW *win){
+    werase(win);
     box(win, 0, 0);
     wrefresh(win);
+    if(l->inicio == NULL)
+        return;
     char cod[20];
     DigitandoCodigo(win, cod);
     Remover(l, cod);
@@ -349,13 +342,7 @@ int DataValida(WINDOW *win, Produto *prod)  // Função que verifica se as datas
         
             return 1;
     }
-    // wattron(win, A_BLINK);
-    // wattron(win, A_BOLD); 
-    // mvwprintw(win, 13, 5, "*Digite uma data valida !*");
-    // wattroff(win, A_BOLD); 
-    // wattroff(win, A_BLINK);
-    // wrefresh(win);
-            
+
     return 0;
 }
 
@@ -373,7 +360,7 @@ struct tm DataAtual()  // Função que verifica o ano atual, utilizando a biblio
 
 void ConferirValidade(WINDOW* win, Lista *l) // Função que confere a validade dos itens já em estoque
 {
-
+    werase(win);
     int i = 0;
     char est[8] = {"estoque"}; // Passa o nome do arquivo txt há ser aberto
     InserirMemoria(est, l, 0); // Salvando os itens do txt na memória principal
@@ -426,7 +413,7 @@ void ConferirValidade(WINDOW* win, Lista *l) // Função que confere a validade 
     wrefresh(win);
 }
 
-void Salvar(WINDOW* win, Lista l, char opt[2])
+void Salvar(WINDOW* win, Lista l, char opt[2]) // Função que salva os produtos da lista atribuída no estoque
 {
     char data[12];
     FILE *estoque;
@@ -434,7 +421,7 @@ void Salvar(WINDOW* win, Lista l, char opt[2])
     //if (opt == 1)
     if((estoque = fopen("./EMP/estoque.txt",opt))) {// se conseguir abrir o arquivo do estoque
 
-        if(l.inicio == NULL){
+        if(l.inicio == NULL){//Caso a lista seja vazia
                 wclear(win);
                 box(win, 1, 0);
                 char text[80] = "** NAO E POSSIVEL SALVAR UMA LISTA VAZIA **";
@@ -471,7 +458,7 @@ void Salvar(WINDOW* win, Lista l, char opt[2])
             aux = aux->prox;
         }
         while(aux != l.inicio);
-        fclose(estoque);
+        fclose(estoque); // função necessária sempre ao abrir um arquivo, serve para fecha-lo
     }
     else printf("Não foi possível abrir o arquivo!\n");
 
@@ -483,7 +470,7 @@ void Salvar(WINDOW* win, Lista l, char opt[2])
     mvwprintw(win,1, (getmaxx(win)/2) - (strlen(text)/2), "%s", text);
     wattroff(win, A_BOLD);
     wrefresh(win);
-    return; // função necessária sempre ao abrir um arquivo, serve para fecha-lo
+    return;
 }
 
 /*void SalvandoProdutos(Lista *l) // Função que verifica o chamado para salvar os itens no txt do estoque
@@ -509,26 +496,26 @@ void Salvar(WINDOW* win, Lista l, char opt[2])
 
 }*/
 
-int ConfereEmp(char *dado) // Função para verificar a existência da empresa
-{
-    FILE *Arquivo;
-    char emp[70];
-    strcat(dado, "\n");
-    if((Arquivo = fopen("Empresas.txt", "r")))
-    {
-        while(fgets(emp, 30, Arquivo)) // Enquanto fgets for diferente de nulo
-        {
-            if(strcmp(dado, emp) == 0) // compara as empresas existentes com a string inserida
-            {
-                fclose(Arquivo);
-                return 1;
-            }
-        }
-    }
-    fclose(Arquivo);
-    printf("Empresa não existente\n");
-    return 0;
-}
+// int ConfereEmp(char *dado) // Função para verificar a existência da empresa
+// {
+//     FILE *Arquivo;
+//     char emp[70];
+//     strcat(dado, "\n");
+//     if((Arquivo = fopen("Empresas.txt", "r")))
+//     {
+//         while(fgets(emp, 30, Arquivo)) // Enquanto fgets for diferente de nulo
+//         {
+//             if(strcmp(dado, emp) == 0) // compara as empresas existentes com a string inserida
+//             {
+//                 fclose(Arquivo);
+//                 return 1;
+//             }
+//         }
+//     }
+//     fclose(Arquivo);
+//     printf("Empresa não existente\n");
+//     return 0;
+// }
 
 int ConfereCod(WINDOW *win, char *dado, Produto *produto, Lista *l2) // Função que verifica a existência do código de barras na base da empresa e retorna sua descrição para o produto
 {
@@ -582,7 +569,7 @@ int InserirMemoria(char *Empresa, Lista *l, int tipo)  // Função que passa tod
         strcat(aux, ".txt");
         
         if((Arq = fopen(aux, "r")) == NULL) return 0;
-        if(tipo == 1) // primeiro uso da função, utilizada pra salvar itens na lista das empresas 
+        if(tipo == 1) // primeiro uso da função, utilizada pra salvar itens da lista das empresas 
         {
             do
             {
@@ -598,7 +585,7 @@ int InserirMemoria(char *Empresa, Lista *l, int tipo)  // Função que passa tod
             }
             while(codigo[0] != '\0');
         }
-        else if (tipo == 0) // segundo iso, utilizada para salva itens do estoque.txt na lista do estoque
+        else if (tipo == 0) // segundo iso, utilizada para salva itens do estoque.txt na lista do estoque, usada na função de conferir validade
         {
             do
             {
@@ -629,13 +616,11 @@ void PassaInteiro(Produto *p) // função utilizada para transferir a data, capt
     if(p->Data)
     {
         char auxdia[3], auxmes[3], auxano[5], a;
-        int i = 0, j=0;
+        int i = 0, j=0, k = 0;
         
-        //0123456789  10
-        //18/05/2046  \0
         if (p->Data[0] == '*')
             i = 1;
-        int k = i;
+        k = i;
         while(i < k+2)
         {
             auxdia[j] = p->Data[i];
@@ -667,13 +652,13 @@ void PassaInteiro(Produto *p) // função utilizada para transferir a data, capt
     }
 }
 
-void ConsultarEstoque(Lista l){
-    char est[8] = {"estoque"};
-    InserirMemoria(est ,&l, 0);
-    //InserirMemoria("estoque" ,&l, 0);
-    printf("\t\t\t\nA organização possui, dentro do seu estoque: %d itens\n", Tamanho(l));
-    if(Tamanho(l) == 0) return;
-    printf("\t\nSendo eles:\n");
-    Mostra(l);
-    return;
-}
+// void ConsultarEstoque(Lista l){
+//     char est[8] = {"estoque"};
+//     InserirMemoria(est ,&l, 0);
+//     //InserirMemoria("estoque" ,&l, 0);
+//     printf("\t\t\t\nA organização possui, dentro do seu estoque: %d itens\n", Tamanho(l));
+//     if(Tamanho(l) == 0) return;
+//     printf("\t\nSendo eles:\n");
+//     Mostra(l);
+//     return;
+// }

@@ -35,7 +35,6 @@ int main()
     while (1)
     {
         int c = 0;
-        
         JanelaOPT = DesenharJanelaOPT(COLUNAS, LINHAS);
         wrefresh(JanelaOPT);
         int opt = preencherJanelaOPT(JanelaOPT);
