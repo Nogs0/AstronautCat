@@ -189,6 +189,7 @@ void DigitandoCodigo(WINDOW *win, char cod[14])
 	
 	memset(cod, '\0', 14);							//reseta o vetor 
 	int tam = strlen("Codigo de barras: ") + 5;		//define a coluna onde o cursor vai se mover
+	
 	mvwprintw(win, 9, 5, "Codigo de barras: ");		//printa na tela 
 	capturandoTeclado(win, cod, tam, 9, 14);		//função de capturar teclado
 	
@@ -199,8 +200,8 @@ void DigitandoData( WINDOW *win, char data[11])
 {
 	memset(data, '\0', 11);	//reseto a string
 	int tam = strlen("Digite a data de validade: ") + 5; //defino onde vai começar a aparecer as escritas
-	mvwprintw(win, 12, 5, "Digite a data de validade: ");//printo na tela
-	capturandoTeclado(win, data, tam, 12, 11);			//função
+	mvwprintw(win, 15, 5, "Digite a data de validade: ");//printo na tela
+	capturandoTeclado(win, data, tam, 15, 11);			//função
 	
 	wrefresh(win);
 	
@@ -214,6 +215,8 @@ void capturandoTeclado(WINDOW* win, char *cod, int tam, int linha, int tamanhoTo
 	
 	keypad(win, true);			//ativa o teclado
 	int i = 0, c = 0;			//inicializa as variaveis
+	move(linha,tam);
+	wclrtoeol(win);
 	wrefresh(win);				//atualiza a tela
 	while (i < tamanhoTotal -1)	//tamanhoTotal é o tamanho da string, 13 para codigo e 11 para data
 	{
@@ -265,7 +268,7 @@ void MostrarEmpresas(WINDOW *win, int altura, char empresas[][30], int highlight
 	int j = 0;
 	box(win, 0,0);
 	wattron(win, A_BOLD);
-	char text[32] = "SELECIONE A EMPRESA: (F2 >>)";
+	char text[35] = "(<F1)SELECIONE A EMPRESA: (F2>)";
 	mvwprintw(win,1, (getmaxx(win)/2) - (strlen(text)/2), "%s", text);
 
 	wattroff(win, A_BOLD);

@@ -119,8 +119,10 @@ void MostraNCURSES(WINDOW *win, Lista *l, char *titulo)			//semelhante a funçã
     mvwprintw(win,1, (getmaxx(win)/2) - (strlen(titulo)/2), "%s",titulo);
     wattroff(win, A_DIM);
     if(l->inicio == NULL) {
-        
-        mvwprintw(win, i, 3, "Lista vazia!\n");
+        char text[50] = "** LISTA VAZIA **";
+        wattron(win, A_BOLD);
+        mvwprintw(win,2, (getmaxx(win)/2) - (strlen(text)/2), "%s", text);
+        wattroff(win, A_BOLD);
         wrefresh(win);
     }
     else
@@ -137,7 +139,7 @@ void MostraNCURSES(WINDOW *win, Lista *l, char *titulo)			//semelhante a funçã
                     aux2[i] = aux->p.Descricao[i];
                 }
             for (i = getmaxx(win) - 10; i < getmaxx(win) - 7; i++)
-                aux2[i] = '.';
+                aux2[i-1] = '.';
             aux2[i] = '\0';
             }
             else
@@ -187,10 +189,17 @@ void AdicionandoProduto(Lista *l, Lista *l2, WINDOW* win, char cod[13], char dat
         char aux2[150] = {};
         DigitandoCodigo(win, cod);
         strcpy(aux.CodigoB, cod);
-
         memset(aux.Descricao, '\0', 200);
-        ConfereCod(empresa, &aux, l);
-
+        while(ConfereCod(win, empresa, &aux, l) == 0)
+        {
+            DigitandoCodigo(win, cod);
+            strcpy(aux.CodigoB, cod);
+            memset(aux.Descricao, '\0', 200);
+        }
+        wmove(win, 7,0);
+        wclrtoeol(win);
+        
+        wrefresh(win);
         if (strlen(aux.Descricao) > getmaxx(win) - 10){
                 int i = 0;
                 for (i = 0; i < getmaxx(win) - 10; i++)
@@ -198,7 +207,7 @@ void AdicionandoProduto(Lista *l, Lista *l2, WINDOW* win, char cod[13], char dat
                     aux2[i] = aux.Descricao[i];
                 }
             for (i = getmaxx(win) - 10; i < getmaxx(win) - 7; i++)
-                aux2[i] = '.';
+                aux2[i-1] = '.';
             aux2[i] = '\0';
             }
             else
@@ -209,14 +218,17 @@ void AdicionandoProduto(Lista *l, Lista *l2, WINDOW* win, char cod[13], char dat
         strcpy(aux.Data, data);
         PassaInteiro(&aux);
 
-        while(DataValida(&aux) == 0){
+
+        while(DataValida(win, &aux) == 0){
             DigitandoData(win, data);
             strcpy(aux.Data, data);
-             PassaInteiro(&aux);
-            
+            PassaInteiro(&aux);
         }
+        wmove(win, 12,0);
+        wclrtoeol(win);
+
         InsereOrdenado(l2, aux);
-        mvwprintw(win, 15,5, "Tudo ok, produto adicionado a lista de alocacao !");
+        mvwprintw(win, 17,5, "Tudo ok, produto adicionado a lista de alocacao !");
         wrefresh(win);
         keypad(win, FALSE);
 }
@@ -318,7 +330,7 @@ void RemovendoProduto(Lista *l, WINDOW *win){
     wrefresh(win);
 }
 
-int DataValida(Produto *prod)  // Função que verifica se as datas de vencimento inseridas são válidas
+int DataValida(WINDOW *win, Produto *prod)  // Função que verifica se as datas de vencimento inseridas são válidas
 {
 
     struct tm atual;
@@ -328,13 +340,22 @@ int DataValida(Produto *prod)  // Função que verifica se as datas de venciment
             if(prod->Dia>= atual.tm_mday && prod->Dia <=30) // se o dia for maior ou igual ao atual && menor ou igual a 30 é válida
                 return 1;
             else return 0;
+            
         }
         else return 0;
+        
 
     if(prod->Ano > atual.tm_year) // se o ano for maior que o atual e os dias e meses válidos, aceita
         if(prod->Dia <= 30 && prod->Mes <=12)
+        
             return 1;
-
+    wattron(win, A_BLINK);
+    wattron(win, A_BOLD); 
+    mvwprintw(win, 13, 5, "*Digite uma data valida !*");
+    wattroff(win, A_BOLD); 
+    wattroff(win, A_BLINK);
+    wrefresh(win);
+            
     return 0;
 }
 
@@ -365,7 +386,7 @@ void ConferirValidade(WINDOW* win, Lista *l) // Função que confere a validade 
     aux = l->inicio;
     do // Enquanto existirem produtos na lista
     {
-        if(DataValida(&aux->p) == 0 && aux->p.Validade != 1) // if que verifica se os produtos estão vencidos
+        if(DataValida(win, &aux->p) == 0 && aux->p.Validade != 1) // if que verifica se os produtos estão vencidos
         {
             
                 char opt;
@@ -381,7 +402,7 @@ void ConferirValidade(WINDOW* win, Lista *l) // Função que confere a validade 
                 if(opt == 'y'){
                     Remover(l, aux->p.CodigoB);
                     char opt2[3] = "w+";
-                    Salvar(*l, opt2);
+                    Salvar(win, *l, opt2);
                     if(l->inicio == NULL)   return;
                 }
                 i++;
@@ -392,7 +413,8 @@ void ConferirValidade(WINDOW* win, Lista *l) // Função que confere a validade 
     while(aux != l->inicio);
     if(i == 0){
         wattron(win, A_BOLD);
-        mvwprintw(win, 2,4, "O estoque nao possui itens vencidos ");
+        char text[50] = "** O ESTOQUE NAO POSSUI ITENS VENCIDOS **";
+        mvwprintw(win,2, (getmaxx(win)/2) - (strlen(text)/2), "%s", text);
         wattroff(win, A_BOLD);
         wrefresh(win);
         return;
@@ -400,7 +422,7 @@ void ConferirValidade(WINDOW* win, Lista *l) // Função que confere a validade 
     wrefresh(win);
 }
 
-void Salvar(Lista l, char opt[2])
+void Salvar(WINDOW* win, Lista l, char opt[2])
 {
     char data[12];
     FILE *estoque;
@@ -409,6 +431,15 @@ void Salvar(Lista l, char opt[2])
     if((estoque = fopen("./EMP/estoque.txt",opt))) {// se conseguir abrir o arquivo do estoque
 
         if(l.inicio == NULL){
+                wclear(win);
+                box(win, 1, 0);
+                char text[80] = "** NAO E POSSIVEL SALVAR UMA LISTA VAZIA **";
+                wattron(win, A_BOLD);
+                 wattron(win, A_BLINK);
+                mvwprintw(win,1, (getmaxx(win)/2) - (strlen(text)/2), "%s", text);
+                wattroff(win, A_BOLD);
+                wattroff(win, A_BLINK);
+                wrefresh(win);
                 fprintf(estoque, "%c", ' ');
                 fclose(estoque);
                 return;
@@ -440,10 +471,18 @@ void Salvar(Lista l, char opt[2])
     }
     else printf("Não foi possível abrir o arquivo!\n");
 
+
+    wclear(win);
+    box(win, 1,0);
+    char text[50] = "LISTA SALVA NA MEMORIA !!!";
+    wattron(win, A_BOLD);
+    mvwprintw(win,1, (getmaxx(win)/2) - (strlen(text)/2), "%s", text);
+    wattroff(win, A_BOLD);
+    wrefresh(win);
     return; // função necessária sempre ao abrir um arquivo, serve para fecha-lo
 }
 
-void SalvandoProdutos(Lista *l) // Função que verifica o chamado para salvar os itens no txt do estoque
+/*void SalvandoProdutos(Lista *l) // Função que verifica o chamado para salvar os itens no txt do estoque
 {
     if(l->inicio != NULL)
     {
@@ -464,7 +503,7 @@ void SalvandoProdutos(Lista *l) // Função que verifica o chamado para salvar o
     else
         return;
 
-}
+}*/
 
 int ConfereEmp(char *dado) // Função para verificar a existência da empresa
 {
@@ -487,7 +526,7 @@ int ConfereEmp(char *dado) // Função para verificar a existência da empresa
     return 0;
 }
 
-int ConfereCod(char *dado, Produto *produto, Lista *l2) // Função que verifica a existência do código de barras na base da empresa e retorna sua descrição para o produto
+int ConfereCod(WINDOW *win, char *dado, Produto *produto, Lista *l2) // Função que verifica a existência do código de barras na base da empresa e retorna sua descrição para o produto
 {
     int i = 0;
     char aux[20] = {"./EMP/"};
@@ -515,7 +554,11 @@ int ConfereCod(char *dado, Produto *produto, Lista *l2) // Função que verifica
         }
     }
     fclose(ArquivoEmpresa);
-    printf("\nCodigo não encontrado na base de dados da empresa!\n");
+    wattron(win, A_BLINK);
+    wattron(win, A_BOLD);   
+    mvwprintw(win, 7, 5, "*Codigo não encontrado na base de dados da empresa!*");
+    wattroff(win, A_BLINK);
+    wattroff(win, A_BOLD); 
     return 0;
 }
 

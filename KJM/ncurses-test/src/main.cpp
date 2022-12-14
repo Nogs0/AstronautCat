@@ -67,14 +67,19 @@ int main()
                     werase(JanelaEntrada);
                     wrefresh(JanelaEntrada);
                     JanelaEntrada = DesenharJanelaEntrada(COLUNAS, LINHAS);
+                    wclear(JanelaEntrada);
+                    box(JanelaEntrada, 1,0);
+                    wrefresh(JanelaEntrada);
                     ConferirValidade(JanelaEntrada, &listaValidade);
                     CriaLista(&listaValidade);
                     break;
                 case 5:
                 {
                     char opt2[2] = "a";
-                    Salvar(listaAlocacao, opt2);
+                    Salvar(JanelaEntrada, listaAlocacao, opt2);
                     CriaLista(&listaAlocacao);
+                    
+                    
                     break;
                 }
                 case 6:
