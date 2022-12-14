@@ -116,7 +116,7 @@ void MostraNCURSES(WINDOW *win, Lista *l, char *titulo)			//semelhante a funçã
     char aux2[150] = {}; 
     No *aux;
     wattron(win, A_DIM);
-    mvwprintw(win,1, (getmaxx(win)/2) - (strlen(titulo)/2), titulo);
+    mvwprintw(win,1, (getmaxx(win)/2) - (strlen(titulo)/2), "%s",titulo);
     wattroff(win, A_DIM);
     if(l->inicio == NULL) {
         
@@ -184,12 +184,27 @@ void AdicionandoProduto(Lista *l, Lista *l2, WINDOW* win, char cod[13], char dat
     
 
         Produto aux;
+        char aux2[150] = {};
         DigitandoCodigo(win, cod);
         strcpy(aux.CodigoB, cod);
 
         memset(aux.Descricao, '\0', 200);
         ConfereCod(empresa, &aux, l);
-        mvwprintw(win, 10,5 , "%s", aux.Descricao);
+
+        if (strlen(aux.Descricao) > getmaxx(win) - 10){
+                int i = 0;
+                for (i = 0; i < getmaxx(win) - 10; i++)
+                {
+                    aux2[i] = aux.Descricao[i];
+                }
+            for (i = getmaxx(win) - 10; i < getmaxx(win) - 7; i++)
+                aux2[i] = '.';
+            aux2[i] = '\0';
+            }
+            else
+                strcpy(aux2, aux.Descricao);
+            
+        mvwprintw(win, 10,5 , "%s", aux2);
         DigitandoData(win, data);
         strcpy(aux.Data, data);
         PassaInteiro(&aux);
@@ -365,7 +380,8 @@ void ConferirValidade(WINDOW* win, Lista *l) // Função que confere a validade 
                 scanf(" %c", &opt);
                 if(opt == 'y'){
                     Remover(l, aux->p.CodigoB);
-                    Salvar(*l, "w+");
+                    char opt2[3] = "w+";
+                    Salvar(*l, opt2);
                     if(l->inicio == NULL)   return;
                 }
                 i++;
@@ -439,7 +455,8 @@ void SalvandoProdutos(Lista *l) // Função que verifica o chamado para salvar o
         opt = tolower(opt);
         if(opt == 'y')
         {
-            Salvar(*l, "a");
+            char opt2[2] = "a";
+            Salvar(*l, opt2);
             CriaLista(l);
             clearscr();
         }

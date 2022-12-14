@@ -253,7 +253,7 @@ void PreencherJanelaEntrada(WINDOW *win, char *empresaAtual)
 {
 		werase(win);
 		box(win, 0,0);
-		mvwprintw(win, 1, (getmaxx(win)/2) - (strlen(empresaAtual)/2), empresaAtual);
+		mvwprintw(win, 1, (getmaxx(win)/2) - (strlen(empresaAtual)/2), "%s", empresaAtual);
 
 }
 
@@ -266,7 +266,7 @@ void MostrarEmpresas(WINDOW *win, int altura, char empresas[][30], int highlight
 	box(win, 0,0);
 	wattron(win, A_BOLD);
 	char text[32] = "SELECIONE A EMPRESA: (F2 >>)";
-	mvwprintw(win,1, (getmaxx(win)/2) - (strlen(text)/2), text);
+	mvwprintw(win,1, (getmaxx(win)/2) - (strlen(text)/2), "%s", text);
 
 	wattroff(win, A_BOLD);
 	

@@ -56,21 +56,27 @@ int main()
                     //refresh();
                     break;
                 case 3:
+                {
                     werase(JanelaEntrada);
-                    MostraNCURSES(JanelaEntrada, &listaAlocacao, "LISTA ATUAL");
-                    werase(JanelaEntrada);
+                    wrefresh(JanelaEntrada);
+                    char phrase[12] = "LISTA ATUAL";
+                    MostraNCURSES(JanelaEntrada, &listaAlocacao, phrase);
                     break;
+                }
                 case 4:
                     werase(JanelaEntrada);
+                    wrefresh(JanelaEntrada);
                     JanelaEntrada = DesenharJanelaEntrada(COLUNAS, LINHAS);
                     ConferirValidade(JanelaEntrada, &listaValidade);
                     CriaLista(&listaValidade);
-                    werase(JanelaEntrada);
                     break;
                 case 5:
-                    Salvar(listaAlocacao, "a");
+                {
+                    char opt2[2] = "a";
+                    Salvar(listaAlocacao, opt2);
                     CriaLista(&listaAlocacao);
                     break;
+                }
                 case 6:
                     refresh();
                     endwin();

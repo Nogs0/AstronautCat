@@ -65,8 +65,7 @@ CMakeFiles/lib.dir/lib/Func.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h /usr/include/alloca.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
  /usr/include/c++/11/bits/std_abs.h /usr/include/string.h \
- /usr/include/strings.h /usr/include/locale.h \
- /usr/include/x86_64-linux-gnu/bits/locale.h /usr/include/time.h \
+ /usr/include/strings.h /usr/include/time.h \
  /usr/include/x86_64-linux-gnu/bits/time.h \
  /usr/include/x86_64-linux-gnu/bits/timex.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \

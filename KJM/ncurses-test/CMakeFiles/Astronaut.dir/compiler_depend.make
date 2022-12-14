@@ -79,8 +79,6 @@ CMakeFiles/Astronaut.dir/src/main.cpp.o: src/main.cpp \
   /usr/include/c++/11/bits/std_abs.h \
   /usr/include/string.h \
   /usr/include/strings.h \
-  /usr/include/locale.h \
-  /usr/include/x86_64-linux-gnu/bits/locale.h \
   /usr/include/time.h \
   /usr/include/x86_64-linux-gnu/bits/time.h \
   /usr/include/x86_64-linux-gnu/bits/timex.h \
@@ -95,8 +93,6 @@ CMakeFiles/Astronaut.dir/src/main.cpp.o: src/main.cpp \
 
 /usr/include/time.h:
 
-/usr/include/locale.h:
-
 /usr/include/strings.h:
 
 /usr/include/alloca.h:
@@ -106,8 +102,6 @@ CMakeFiles/Astronaut.dir/src/main.cpp.o: src/main.cpp \
 /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
-
-/usr/include/x86_64-linux-gnu/bits/locale.h:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
