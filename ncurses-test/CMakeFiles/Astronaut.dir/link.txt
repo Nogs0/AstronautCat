@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/Astronaut.dir/src/main.cpp.o -o Astronaut  liblib.a -lncurses 
