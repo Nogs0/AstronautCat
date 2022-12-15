@@ -1,21 +1,24 @@
 #include "../includes/HeaderGraphic.h"
 
-
-WINDOW *DesenharJanelaEntrada(int COLUNAS, int LINHAS)
+//Função que retorna a janela Entrada para a variável na main
+WINDOW *DesenharJanelaEntrada(int COLUNAS, int LINHAS) 
 {
     WINDOW *JanelaEntrada;
+
+	//Divide a tela em 3 e pega os 2/3 da direita
 	JanelaEntrada = newwin(LINHAS, COLUNAS-COLUNAS/3 - 1, 0, COLUNAS/3 + 1);
+
 	box(JanelaEntrada, 0,0);
 	wrefresh(JanelaEntrada);
 	return JanelaEntrada;
 	
 }
-
-WINDOW *DesenharJanelaEmpresas(int COLUNAS, int LINHAS)
+//Função que retorna a janela empresas (a que tem as opções) para a variável na main
+WINDOW *DesenharJanelaEmpresas(int COLUNAS, int LINHAS) 
 {
-	//clearscr();
-   
 	WINDOW *JanelaEmpresas;
+
+	//Divide a tela em 3 e pega 1/3 da esquerda
 	JanelaEmpresas = newwin(LINHAS, COLUNAS/3, 0, 0);
 	box(JanelaEmpresas, 0,0);
 	wrefresh(JanelaEmpresas);
@@ -39,6 +42,7 @@ WINDOW *DesenharJanelaOPT(int COLUNAS, int LINHAS)
 
 int preencherJanelaOPT(WINDOW *JanelaOPT)
 {
+	//Matriz com as opções da primeira tela
 	char options[6][100] = {"ADICIONAR PRODUTOS A LISTA", 
 							"REMOVER", 
 							"MOSTRAR LISTA DE ALOCACAO", 
@@ -50,11 +54,20 @@ int preencherJanelaOPT(WINDOW *JanelaOPT)
 	int highlight = 1;
 	int totalEscolha = 6;
 	int choice = 0;
+
+	//Ativa o teclado na janela
 	keypad(JanelaOPT, TRUE);
 
+	//(MostrarOPT) -> Função que atualiza a tela, printando de forma destacada a opção atual
+		//JanelaOPT = Window atual;
+		//Highlight = Valor que acompanha as teclas de seta para cima e para baixo
+		//totalEscolha = Numero de opções disponíveis
+		//options = Matriz com as opções
 	MostrarOPT(JanelaOPT, highlight, totalEscolha, options);
+
 	while(1)
-	{
+	{	
+		//Captura uma tecla
 		c = wgetch(JanelaOPT);
 		switch(c){
 			case KEY_UP:
@@ -70,9 +83,10 @@ int preencherJanelaOPT(WINDOW *JanelaOPT)
 			else
 			++highlight;
 			break;
-		case 10:
+		case 10: //Enter
 			choice = highlight;
-			return highlight;
+			//Ao apertar Enter ele sai do loop, pois uma função foi selecionada
+			return highlight; //Ele retorna o valor da opção atual
 			break;
 		default:
 			break;
@@ -90,7 +104,9 @@ void MostrarOPT(WINDOW *win, int highlight, int tamanhoTotal, char choices[][100
 	
 
   for(i = 0; i < tamanhoTotal; ++i){
-    if(highlight == i + 1){ /* Destaca a escolha atual */
+    if(highlight == i + 1){ 
+
+	  // Destaca a escolha atual 
       wattron(win, A_REVERSE);
       mvwprintw(win, y, x,"%s", choices[i]);
       wattroff(win, A_REVERSE);
@@ -107,11 +123,19 @@ int PreencherJanelaEmpresas(Lista *listaAlocacao, WINDOW* win2, char *empresaAtu
 {
 	int inicio = 0;
 	int highlight = inicio + 1;
+
+	//Como o tamanho da interface é definida antes da abertura do terminal,
+	//eu usei uma constante para definir a quantidade de produtos por pagina
 	int totalEscolha = 26;
 	int voltar = 0;
 	wrefresh(win);
 	keypad(win, TRUE);
-
+	
+	/*
+	MostrarEmpresas: A diferença daqui para a MostrarOPT é o parâmetro "inicio"
+	ele é necessário para quando passar de pagina o inicio ser +26 do anterior, 
+	então, por ser um vetor, ele vai parecer que passou de pagina
+	*/
 	MostrarEmpresas(win, totalEscolha, empresas, highlight, inicio);
 
 	while(1)
@@ -122,20 +146,20 @@ int PreencherJanelaEmpresas(Lista *listaAlocacao, WINDOW* win2, char *empresaAtu
 		{
 			
 			case KEY_F(2):
-				if (inicio + totalEscolha < 78)
+				if (inicio + totalEscolha < 78) 		// 78 é o numero total de empresas
 				{
 					wclear(win);
 					box(win, 0,0);
-					inicio = inicio + totalEscolha;
-					highlight = inicio + 1;
+					inicio = inicio + totalEscolha;		// F2 é para passar para proxima pagina
+					highlight = inicio + 1;				// A primeira opcao sempre vai começar destacada
 					MostrarEmpresas(win, totalEscolha, empresas, highlight, inicio);
 					break;
 				}
-				else
+				else									//caso não seja a ultima página
 				{
 					wclear(win);
 					box(win, 0,0);
-					inicio = inicio + totalEscolha - 78;
+					inicio = inicio + totalEscolha - 78;	
 					highlight = inicio + 1;
 					MostrarEmpresas(win, totalEscolha, empresas, highlight, inicio);
 					break;
@@ -149,10 +173,10 @@ int PreencherJanelaEmpresas(Lista *listaAlocacao, WINDOW* win2, char *empresaAtu
 				Lista listaProdutos;
 				CriaLista(&listaProdutos);
 
-				strcpy(empresaAtual, empresas[highlight -1]);
-				PreencherJanelaEntrada(win2, empresaAtual);
-				InserirMemoria(empresaAtual, &listaProdutos, 1);
-				AdicionandoProduto(&listaProdutos, listaAlocacao, win2,cod, data, empresaAtual);
+				strcpy(empresaAtual, empresas[highlight -1]); // Copia para string empresaAtual o nome da empresa em destaque quando ENTER foi pressionado
+				PreencherJanelaEntrada(win2, empresaAtual);   // Coloca o nome da empresa em cima da janela
+				InserirMemoria(empresaAtual, &listaProdutos, 1);	//procura o txt da empresa e insere todos os itens na memoria
+				AdicionandoProduto(&listaProdutos, listaAlocacao, win2,cod, data, empresaAtual); //Funcao que adiciona o produto
 				wrefresh(win2);
 				break;
 			}
@@ -267,17 +291,15 @@ void MostrarEmpresas(WINDOW *win, int altura, char empresas[][30], int highlight
 	y = 3;
 	int j = 0;
 	box(win, 0,0);
-	wattron(win, A_BOLD);
+	wattron(win, A_BOLD);								//Ativa o negrito
 	char text[35] = "(<F1) SELECIONE A EMPRESA (F2>)";
 	mvwprintw(win,1, (getmaxx(win)/2) - (strlen(text)/2), "%s", text);
-
-	wattroff(win, A_BOLD);
-	
+	wattroff(win, A_BOLD);  							//Desativa o negrito
 	for(i = inicio; i - inicio < altura; ++i)
 	{	if(highlight == i + 1) 		
-		{	wattron(win, A_REVERSE);
-			mvwprintw(win, y, x, "%s", empresas[i]);
-			wattroff(win, A_REVERSE);
+		{	wattron(win, A_REVERSE); 					//ativa o fundo branco
+			mvwprintw(win, y, x, "%s", empresas[i]);	//destaca a escolha
+			wattroff(win, A_REVERSE);					//desativa o fundo branco
 		}
 		else
 			mvwprintw(win, y, x, "%s", empresas[i]);
