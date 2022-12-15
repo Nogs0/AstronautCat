@@ -40,7 +40,7 @@ int  InsereOrdenado(Lista *, Produto);
 //void AdicionandoProduto(Lista *, Lista *);
 int Remover(Lista*, char *);
 //void RemovendoProduto(Lista*);
-int DataValida(WINDOW*, Produto *);
+int DataValida(WINDOW*, Produto *, int);
 struct tm DataAtual(void);
 void ConferirValidade(WINDOW*, Lista* );
 void Salvar(WINDOW*, Lista, char[2]);

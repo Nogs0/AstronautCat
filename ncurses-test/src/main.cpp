@@ -38,6 +38,7 @@ int main()
         JanelaOPT = DesenharJanelaOPT(COLUNAS, LINHAS);
         wrefresh(JanelaOPT);
         int opt = preencherJanelaOPT(JanelaOPT);
+
             switch(opt)
             {
                 case 1: //ADICIONANDO PRODUTO
@@ -63,7 +64,6 @@ int main()
                     break;
                 }
                 case 4:
-                     werase(JanelaEntrada);
                     wrefresh(JanelaEntrada);
                     JanelaEntrada = DesenharJanelaEntrada(COLUNAS, LINHAS);
                    

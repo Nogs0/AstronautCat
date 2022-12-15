@@ -1,0 +1,4 @@
+/home/joao/Documents/AED ||/AstronautCat/AstronautCat/ncurses-test/CMakeFiles/lib.dir
+/home/joao/Documents/AED ||/AstronautCat/AstronautCat/ncurses-test/CMakeFiles/Astronaut.dir
+/home/joao/Documents/AED ||/AstronautCat/AstronautCat/ncurses-test/CMakeFiles/edit_cache.dir
+/home/joao/Documents/AED ||/AstronautCat/AstronautCat/ncurses-test/CMakeFiles/rebuild_cache.dir

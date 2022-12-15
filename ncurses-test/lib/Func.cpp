@@ -218,7 +218,7 @@ void AdicionandoProduto(Lista *l, Lista *l2, WINDOW* win, char cod[13], char dat
         PassaInteiro(&aux);
 
 
-        while(DataValida(win, &aux) == 0){
+        while(DataValida(win, &aux, 1) == 0){
             DigitandoData(win, data);
             strcpy(aux.Data, data);
             PassaInteiro(&aux);
@@ -322,7 +322,7 @@ void RemovendoProduto(Lista *l, WINDOW *win){
     wrefresh(win);
 }
 
-int DataValida(WINDOW *win, Produto *prod)  // Função que verifica se as datas de vencimento inseridas são válidas
+int DataValida(WINDOW *win, Produto *prod, int tipo)  // Função que verifica se as datas de vencimento inseridas são válidas
 {
 
     struct tm atual;
@@ -331,18 +331,23 @@ int DataValida(WINDOW *win, Produto *prod)  // Função que verifica se as datas
         if(prod->Mes >= atual.tm_mon && prod->Mes <=12){ //se o mês for maior ou igual ao atual  && menor ou igual a 12 é válida
             if(prod->Dia>= atual.tm_mday && prod->Dia <=30) // se o dia for maior ou igual ao atual && menor ou igual a 30 é válida
                 return 1;
-            else return 0;
             
         }
-        else return 0;
+        else 
+            return 0;
         
 
     if(prod->Ano > atual.tm_year){ // se o ano for maior que o atual e os dias e meses válidos, aceita
         if(prod->Dia <= 30 && prod->Mes <=12)
-        
             return 1;
     }
-
+    if(tipo == 1){
+        wattron(win, A_BLINK);
+        wattron(win, A_BOLD);   
+        mvwprintw(win, 13, 5, "*DIGITE UMA DATA VALIDA!*");
+        wattroff(win, A_BLINK);
+        wattroff(win, A_BOLD);
+    } 
     return 0;
 }
 
@@ -374,7 +379,7 @@ void ConferirValidade(WINDOW* win, Lista *l) // Função que confere a validade 
     aux = l->inicio;
     do // Enquanto existirem produtos na lista
     {
-        if(DataValida(win, &aux->p) == 0 && aux->p.Validade != 1) // if que verifica se os produtos estão vencidos
+        if(DataValida(win, &aux->p, 0) == 0 && aux->p.Validade != 1) // if que verifica se os produtos estão vencidos
         {
                 
                 char opt;
@@ -547,7 +552,7 @@ int ConfereCod(WINDOW *win, char *dado, Produto *produto, Lista *l2) // Função
     fclose(ArquivoEmpresa);
     wattron(win, A_BLINK);
     wattron(win, A_BOLD);   
-    mvwprintw(win, 7, 5, "*Codigo não encontrado na base de dados da empresa!*");
+    mvwprintw(win, 7, 5, "*CODIGO NAO ENCONTRADO NA BASE DE DADOS DA EMPRESA!*");
     wattroff(win, A_BLINK);
     wattroff(win, A_BOLD); 
     return 0;
